@@ -1,0 +1,620 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище CMModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administrator">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employmentDate" Type="date" Nullable="false" />
+          <Property Name="salary" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_customer" Type="int" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="fk_cadastralObject" Type="int" Nullable="false" />
+          <Property Name="fk_cadastralWork" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="50" />
+          <Property Name="fk_status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CadastralObject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_tipeCO" Type="int" Nullable="false" />
+          <Property Name="cadastralNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateOfEntry" Type="date" Nullable="false" />
+          <Property Name="legalStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="square" Type="float" Nullable="false" />
+          <Property Name="cost" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CadastralWork">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_typeCW" Type="int" Nullable="false" />
+          <Property Name="fk_engineer" Type="int" Nullable="false" />
+          <Property Name="accounting" Type="varbinary(max)" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="50" />
+          <Property Name="cost" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="placeWork" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="applications" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Engineer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employmentDate" Type="date" Nullable="false" />
+          <Property Name="salary" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="nomberComplCW" Type="int" />
+          <Property Name="jobStatus" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HandBookOfCOTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tHCOname" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeCW">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tCWname" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="surnameName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="patronimic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateBirth" Type="date" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Applicati__fk_ca__2E1BDC42">
+          <End Role="CadastralObject" Type="Self.CadastralObject" Multiplicity="1" />
+          <End Role="Application" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CadastralObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="fk_cadastralObject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Applicati__fk_ca__2F10007B">
+          <End Role="CadastralWork" Type="Self.CadastralWork" Multiplicity="1" />
+          <End Role="Application" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CadastralWork">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="fk_cadastralWork" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Applicati__fk_cu__2D27B809">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Application" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="fk_customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Applicati__fk_st__300424B4">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Application" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="fk_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cadastral__fk_en__32E0915F">
+          <End Role="Engineer" Type="Self.Engineer" Multiplicity="1" />
+          <End Role="CadastralWork" Type="Self.CadastralWork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Engineer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CadastralWork">
+              <PropertyRef Name="fk_engineer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cadastral__fk_ti__30F848ED">
+          <End Role="HandBookOfCOTypes" Type="Self.HandBookOfCOTypes" Multiplicity="1" />
+          <End Role="CadastralObject" Type="Self.CadastralObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HandBookOfCOTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CadastralObject">
+              <PropertyRef Name="fk_tipeCO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cadastral__fk_ty__31EC6D26">
+          <End Role="TypeCW" Type="Self.TypeCW" Multiplicity="1" />
+          <End Role="CadastralWork" Type="Self.CadastralWork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeCW">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CadastralWork">
+              <PropertyRef Name="fk_typeCW" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище CMModelContainer">
+          <EntitySet Name="Administrator" EntityType="Self.Administrator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CadastralObject" EntityType="Self.CadastralObject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CadastralWork" EntityType="Self.CadastralWork" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Engineer" EntityType="Self.Engineer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HandBookOfCOTypes" EntityType="Self.HandBookOfCOTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeCW" EntityType="Self.TypeCW" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Applicati__fk_ca__2E1BDC42" Association="Self.FK__Applicati__fk_ca__2E1BDC42">
+            <End Role="CadastralObject" EntitySet="CadastralObject" />
+            <End Role="Application" EntitySet="Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Applicati__fk_ca__2F10007B" Association="Self.FK__Applicati__fk_ca__2F10007B">
+            <End Role="CadastralWork" EntitySet="CadastralWork" />
+            <End Role="Application" EntitySet="Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Applicati__fk_cu__2D27B809" Association="Self.FK__Applicati__fk_cu__2D27B809">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Application" EntitySet="Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Applicati__fk_st__300424B4" Association="Self.FK__Applicati__fk_st__300424B4">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Application" EntitySet="Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cadastral__fk_en__32E0915F" Association="Self.FK__Cadastral__fk_en__32E0915F">
+            <End Role="Engineer" EntitySet="Engineer" />
+            <End Role="CadastralWork" EntitySet="CadastralWork" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cadastral__fk_ti__30F848ED" Association="Self.FK__Cadastral__fk_ti__30F848ED">
+            <End Role="HandBookOfCOTypes" EntitySet="HandBookOfCOTypes" />
+            <End Role="CadastralObject" EntitySet="CadastralObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cadastral__fk_ty__31EC6D26" Association="Self.FK__Cadastral__fk_ty__31EC6D26">
+            <End Role="TypeCW" EntitySet="TypeCW" />
+            <End Role="CadastralWork" EntitySet="CadastralWork" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Administrator">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employmentDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="salary" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_customer" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fk_cadastralObject" Type="Int32" Nullable="false" />
+          <Property Name="fk_cadastralWork" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fk_status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CadastralObject" Relationship="Self.FK__Applicati__fk_ca__2E1BDC42" FromRole="Application" ToRole="CadastralObject" />
+          <NavigationProperty Name="CadastralWork" Relationship="Self.FK__Applicati__fk_ca__2F10007B" FromRole="Application" ToRole="CadastralWork" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Applicati__fk_cu__2D27B809" FromRole="Application" ToRole="Customer" />
+          <NavigationProperty Name="Status" Relationship="Self.FK__Applicati__fk_st__300424B4" FromRole="Application" ToRole="Status" />
+        </EntityType>
+        <EntityType Name="CadastralObject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_tipeCO" Type="Int32" Nullable="false" />
+          <Property Name="cadastralNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dateOfEntry" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="legalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="square" Type="Double" Nullable="false" />
+          <Property Name="cost" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Application" Relationship="Self.FK__Applicati__fk_ca__2E1BDC42" FromRole="CadastralObject" ToRole="Application" />
+          <NavigationProperty Name="HandBookOfCOTypes" Relationship="Self.FK__Cadastral__fk_ti__30F848ED" FromRole="CadastralObject" ToRole="HandBookOfCOTypes" />
+        </EntityType>
+        <EntityType Name="CadastralWork">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_typeCW" Type="Int32" Nullable="false" />
+          <Property Name="fk_engineer" Type="Int32" Nullable="false" />
+          <Property Name="accounting" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cost" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Application" Relationship="Self.FK__Applicati__fk_ca__2F10007B" FromRole="CadastralWork" ToRole="Application" />
+          <NavigationProperty Name="Engineer" Relationship="Self.FK__Cadastral__fk_en__32E0915F" FromRole="CadastralWork" ToRole="Engineer" />
+          <NavigationProperty Name="TypeCW" Relationship="Self.FK__Cadastral__fk_ty__31EC6D26" FromRole="CadastralWork" ToRole="TypeCW" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="placeWork" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="applications" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Application" Relationship="Self.FK__Applicati__fk_cu__2D27B809" FromRole="Customer" ToRole="Application" />
+        </EntityType>
+        <EntityType Name="Engineer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employmentDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="salary" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="nomberComplCW" Type="Int32" />
+          <Property Name="jobStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CadastralWork" Relationship="Self.FK__Cadastral__fk_en__32E0915F" FromRole="Engineer" ToRole="CadastralWork" />
+        </EntityType>
+        <EntityType Name="HandBookOfCOTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tHCOname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CadastralObject" Relationship="Self.FK__Cadastral__fk_ti__30F848ED" FromRole="HandBookOfCOTypes" ToRole="CadastralObject" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Application" Relationship="Self.FK__Applicati__fk_st__300424B4" FromRole="Status" ToRole="Application" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeCW">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tCWname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CadastralWork" Relationship="Self.FK__Cadastral__fk_ty__31EC6D26" FromRole="TypeCW" ToRole="CadastralWork" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="surnameName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="patronimic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dateBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Applicati__fk_ca__2E1BDC42">
+          <End Role="CadastralObject" Type="Self.CadastralObject" Multiplicity="1" />
+          <End Role="Application" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CadastralObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="fk_cadastralObject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Applicati__fk_ca__2F10007B">
+          <End Role="CadastralWork" Type="Self.CadastralWork" Multiplicity="1" />
+          <End Role="Application" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CadastralWork">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="fk_cadastralWork" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Applicati__fk_cu__2D27B809">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Application" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="fk_customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Applicati__fk_st__300424B4">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Application" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="fk_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cadastral__fk_ti__30F848ED">
+          <End Role="HandBookOfCOTypes" Type="Self.HandBookOfCOTypes" Multiplicity="1" />
+          <End Role="CadastralObject" Type="Self.CadastralObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HandBookOfCOTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CadastralObject">
+              <PropertyRef Name="fk_tipeCO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cadastral__fk_en__32E0915F">
+          <End Role="Engineer" Type="Self.Engineer" Multiplicity="1" />
+          <End Role="CadastralWork" Type="Self.CadastralWork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Engineer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CadastralWork">
+              <PropertyRef Name="fk_engineer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cadastral__fk_ty__31EC6D26">
+          <End Role="TypeCW" Type="Self.TypeCW" Multiplicity="1" />
+          <End Role="CadastralWork" Type="Self.CadastralWork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeCW">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CadastralWork">
+              <PropertyRef Name="fk_typeCW" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CMEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Administrator" EntityType="Self.Administrator" />
+          <EntitySet Name="Application" EntityType="Self.Application" />
+          <EntitySet Name="CadastralObject" EntityType="Self.CadastralObject" />
+          <EntitySet Name="CadastralWork" EntityType="Self.CadastralWork" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" />
+          <EntitySet Name="Engineer" EntityType="Self.Engineer" />
+          <EntitySet Name="HandBookOfCOTypes" EntityType="Self.HandBookOfCOTypes" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="Table" EntityType="Self.Table" />
+          <EntitySet Name="TypeCW" EntityType="Self.TypeCW" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK__Applicati__fk_ca__2E1BDC42" Association="Self.FK__Applicati__fk_ca__2E1BDC42">
+            <End Role="CadastralObject" EntitySet="CadastralObject" />
+            <End Role="Application" EntitySet="Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Applicati__fk_ca__2F10007B" Association="Self.FK__Applicati__fk_ca__2F10007B">
+            <End Role="CadastralWork" EntitySet="CadastralWork" />
+            <End Role="Application" EntitySet="Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Applicati__fk_cu__2D27B809" Association="Self.FK__Applicati__fk_cu__2D27B809">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Application" EntitySet="Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Applicati__fk_st__300424B4" Association="Self.FK__Applicati__fk_st__300424B4">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Application" EntitySet="Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cadastral__fk_ti__30F848ED" Association="Self.FK__Cadastral__fk_ti__30F848ED">
+            <End Role="HandBookOfCOTypes" EntitySet="HandBookOfCOTypes" />
+            <End Role="CadastralObject" EntitySet="CadastralObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cadastral__fk_en__32E0915F" Association="Self.FK__Cadastral__fk_en__32E0915F">
+            <End Role="Engineer" EntitySet="Engineer" />
+            <End Role="CadastralWork" EntitySet="CadastralWork" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cadastral__fk_ty__31EC6D26" Association="Self.FK__Cadastral__fk_ty__31EC6D26">
+            <End Role="TypeCW" EntitySet="TypeCW" />
+            <End Role="CadastralWork" EntitySet="CadastralWork" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CMModelContainer" CdmEntityContainer="CMEntities">
+          <EntitySetMapping Name="Administrator">
+            <EntityTypeMapping TypeName="CMModel.Administrator">
+              <MappingFragment StoreEntitySet="Administrator">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="employmentDate" ColumnName="employmentDate" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Application">
+            <EntityTypeMapping TypeName="CMModel.Application">
+              <MappingFragment StoreEntitySet="Application">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="fk_customer" ColumnName="fk_customer" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="fk_cadastralObject" ColumnName="fk_cadastralObject" />
+                <ScalarProperty Name="fk_cadastralWork" ColumnName="fk_cadastralWork" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="fk_status" ColumnName="fk_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CadastralObject">
+            <EntityTypeMapping TypeName="CMModel.CadastralObject">
+              <MappingFragment StoreEntitySet="CadastralObject">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="fk_tipeCO" ColumnName="fk_tipeCO" />
+                <ScalarProperty Name="cadastralNumber" ColumnName="cadastralNumber" />
+                <ScalarProperty Name="dateOfEntry" ColumnName="dateOfEntry" />
+                <ScalarProperty Name="legalStatus" ColumnName="legalStatus" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="square" ColumnName="square" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CadastralWork">
+            <EntityTypeMapping TypeName="CMModel.CadastralWork">
+              <MappingFragment StoreEntitySet="CadastralWork">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="fk_typeCW" ColumnName="fk_typeCW" />
+                <ScalarProperty Name="fk_engineer" ColumnName="fk_engineer" />
+                <ScalarProperty Name="accounting" ColumnName="accounting" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="CMModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="placeWork" ColumnName="placeWork" />
+                <ScalarProperty Name="applications" ColumnName="applications" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Engineer">
+            <EntityTypeMapping TypeName="CMModel.Engineer">
+              <MappingFragment StoreEntitySet="Engineer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="employmentDate" ColumnName="employmentDate" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="nomberComplCW" ColumnName="nomberComplCW" />
+                <ScalarProperty Name="jobStatus" ColumnName="jobStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HandBookOfCOTypes">
+            <EntityTypeMapping TypeName="CMModel.HandBookOfCOTypes">
+              <MappingFragment StoreEntitySet="HandBookOfCOTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="tHCOname" ColumnName="tHCOname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="CMModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="sName" ColumnName="sName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table">
+            <EntityTypeMapping TypeName="CMModel.Table">
+              <MappingFragment StoreEntitySet="Table">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeCW">
+            <EntityTypeMapping TypeName="CMModel.TypeCW">
+              <MappingFragment StoreEntitySet="TypeCW">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="tCWname" ColumnName="tCWname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="CMModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="surnameName" ColumnName="surnameName" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="patronimic" ColumnName="patronimic" />
+                <ScalarProperty Name="dateBirth" ColumnName="dateBirth" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

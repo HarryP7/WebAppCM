@@ -6,22 +6,24 @@ using System.Web.Mvc;
 
 namespace WebAppCM.Controllers 
 {
-    public class HomeController : Controller
+    public class HomeControllerPr : Controller
     {
-        public ActionResult Index()
+        public ActionResult IndexPr()
         {
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult AboutPr()
         {
-           // ViewBag.Message = "Чем мы занимаемся.";
+            ViewBag.Message = "Your application description page.";
+
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult ContactPr()
         {
-            //ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Your contact page.";
+
             return View();
         }
     }

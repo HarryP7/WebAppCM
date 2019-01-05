@@ -4,28 +4,59 @@
 
 <div class="jumbotron">
     <h1>Кадастровое управление</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <p class="lead"> Кадастровой деятельностью являются выполнение работ в отношении недвижимого имущества в соответствии с
+установленными федеральным законом требованиями, в результате которых обеспечивается подготовка документов, содержащих необходимые 
+    для осуществления государственного кадастрового учета недвижимого имущества (далее - кадастровый учет) сведения о таком 
+    недвижимом имуществе (далее - кадастровые работы), и оказание услуг в установленных федеральным законом случаях. Специальным 
+    правом на осуществление кадастровой деятельности обладает лицо, указанное в статье 29 настоящего Федерального закона 
+    (далее - кадастровый инженер). Федеральный закон о кадастровой деятельности №221-ФЗ от 24.07.2007 в редакции Федерального 
+    закона №361-ФЗ от 03.07.2016</p>
+    @*<p><a href="http://asp.net" class="btn btn-primary btn-lg">Читать больше &raquo;</a></p>*@    
 </div>
-
+<div class="col-lg-pull-1">
+    <h2>Какие виды кадастровых работ существуют?</h2>
+    <p class="lead">&emsp;В зависимости от цели предоставления в орган регистрации прав заявления о постановке либо внесении 
+    изменений в кадастровый учет объекта недвижимости различают следующие виды кадастровых работ:
+<br/>&emsp;&bull; кадастровые работы для подготовки документов с целью представления в орган регистрации прав заявления о постановке 
+    на кадастровый учет земельного участка, либо внесении изменений в кадастровый учет земельного участка. Результатом
+работ является <b>межевой план</b>.
+<br/>&emsp;&bull; кадастровые работы для подготовки документов с целью предоставления в орган регистрации прав заявления о постановке 
+    на кадастровый учет здания, сооружения, помещения, объекта незавершенного строительства, машино-места либо внесения
+изменений в кадастровый учет одного из видов объектов капитального строительства. Результатом работ является <b>технический план</b>.
+<br/>&emsp;&bull; кадастровые работы для подготовки документов с целью предоставления в орган регистрации прав заявления
+о снятии с учета объекта капитального строительства. Результатом работ является <b>акт обследования</b>.</p>
+</div>
+<div class="col-lg-pull-1 text-center">
+    <p><h2><b>Отправить заявку сейчас</b></h2></p>
+    <nav>
+        <ul class="btn btn-default btn-lg">
+            <li> @Html.ActionLink("Отправить заявку сейчас", "TypeApp", "Application")</li>
+        </ul>
+    </nav>
+</div>
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+        <h2>Mежевой план</h2>
+        <p>Для постановки земельного участка на государственный кадастровый учет и внесения изменений в кадастровый учет 
+        необходим межевой план.
         </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        @*<p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>*@
+        <ul class="btn btn-default btn-lg">
+                <li> @Html.ActionLink("Mежевой план", "MejPlan", "Application")</li>
+        </ul>                                           @*"Login", "Account"*@
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <h2>Технический план</h2>
+        <p>здания, сооружения, помещения, квартиры.</p>
+        <ul class="btn btn-default btn-lg">
+                <li> @Html.ActionLink("Технический план", "TehPlan", "Application")</li>
+        </ul> 
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <h2>Акт обследования</h2>
+        <p>Для снятия объекта с кадастрового учета.</p>
+        <ul class="btn btn-default btn-lg">
+                <li> @Html.ActionLink("Акт обследования", "Index", "Home")</li>
+        </ul>
     </div>
 </div>

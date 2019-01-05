@@ -8,19 +8,13 @@ namespace WebAppCM.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
-        {
+        public ActionResult Index()        {
             return View();
         }
-
-        public ActionResult About()
-        {
-           // ViewBag.Message = "Чем мы занимаемся.";
+        public ActionResult About()        {
             return View();
         }
-
-        public ActionResult Contact()
-        {
+        public ActionResult Contact()        {
             //ViewBag.Message = "Your contact page.";
             return View();
         }

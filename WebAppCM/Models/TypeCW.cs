@@ -17,13 +17,16 @@ namespace WebAppCM.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TypeCW()
         {
-            this.CadastralWork = new HashSet<CadastralWork>();
+            this.Applications = new HashSet<Application>();
+            this.CadastralWorks = new HashSet<CadastralWork>();
         }
     
         public int Id { get; set; }
         public string tCWname { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CadastralWork> CadastralWork { get; set; }
+        public virtual ICollection<Application> Applications { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CadastralWork> CadastralWorks { get; set; }
     }
 }

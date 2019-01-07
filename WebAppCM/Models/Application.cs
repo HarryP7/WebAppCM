@@ -16,15 +16,20 @@ namespace WebAppCM.Models
     {
         public int Id { get; set; }
         public int fk_customer { get; set; }
+        public string customerFI { get; set; }
         public System.DateTime date { get; set; }
         public int fk_cadastralObject { get; set; }
-        public int fk_cadastralWork { get; set; }
+        public string cadastralObject { get; set; }
+        public int fk_typeCW { get; set; }
+        public string typeCW { get; set; }
         public string description { get; set; }
         public int fk_status { get; set; }
-    
+        public string status { get; set; }
+
+
         public virtual CadastralObject CadastralObject { get; set; }
-        public virtual CadastralWork CadastralWork { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual Status Status { get; set; }
+        public virtual TypeCW TypeCW { get; set; }
     }
 }

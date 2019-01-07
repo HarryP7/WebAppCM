@@ -17,20 +17,23 @@ namespace WebAppCM.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CadastralObject()
         {
-            this.Application = new HashSet<Application>();
+            this.Applications = new List<Application>();
         }
     
         public int Id { get; set; }
         public int fk_tipeCO { get; set; }
+        public string type { get; set; }
         public string cadastralNumber { get; set; }
         public System.DateTime dateOfEntry { get; set; }
         public string legalStatus { get; set; }
         public string address { get; set; }
+        public string preview { get; set; }
+        public string subPreview { get; set; }
         public double square { get; set; }
         public decimal cost { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Application> Application { get; set; }
-        public virtual HandBookOfCOTypes HandBookOfCOTypes { get; set; }
+        public virtual ICollection<Application> Applications { get; set; }
+        public virtual HandBookOfCOType HandBookOfCOType { get; set; }
     }
 }

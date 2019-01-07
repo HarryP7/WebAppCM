@@ -17,13 +17,13 @@ namespace WebAppCM.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Status()
         {
-            this.Application = new HashSet<Application>();
+            this.Applications = new HashSet<Application>();
         }
     
         public int Id { get; set; }
         public string sName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Application> Application { get; set; }
+        public virtual ICollection<Application> Applications { get; set; }
     }
 }

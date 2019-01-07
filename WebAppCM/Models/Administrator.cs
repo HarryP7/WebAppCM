@@ -15,7 +15,10 @@ namespace WebAppCM.Models
     public partial class Administrator
     {
         public int Ida { get; set; }
-        public DateTime employmentDate { get; set; }
+        public int fk_User { get; set; }
+        public System.DateTime employmentDate { get; set; }
         public decimal salary { get; set; }
+    
+        public virtual User User { get; set; }
     }
 }

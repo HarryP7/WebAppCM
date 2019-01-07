@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WebAppCM.Models.Application>
+@{
+    ViewBag.Title = "Список Кадастровых обьектов";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>@ViewBag.Title</title>
+    <script src="JS/jquery-1.11.0.min.js"></script>
+    <script src="/Content/JS/scrypts.js"></script>
+</head>
+<body>
+    <div>
+        <h3>Список Кадастровыx обьектов</h3>
+        <table class="text-center table-bordered">
+            <tr>
+                <td style="width: 2%;"><p>№</p></td>
+                <td style="width: 10%;"><p>Пользователь</p></td>
+                <td style="width: 12%;"><p>Дата</p></td>
+                <td style="width: 10%;"><p>Тип КО</p></td>
+                <td style="width: 12%;"><p>Тип КР</p></td>
+                <td style="width: 10%;"><p>Описание</p></td>
+                <td style="width: 12%;"><p>Статус</p></td>
+                <td style="width: 10%;"><p></p></td>
+                <td style="width: 10%;"><p></p></td>
+            </tr>
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td><p>@Html.DisplayFor(model => m.Id)</p></td>
+                    <td><p>@Html.DisplayFor(model => m.customerFI)</p></td>
+                    <td><p>@Html.DisplayFor(model => m.date)</p></td>
+                    <td><p>@Html.DisplayFor(model => m.cadastralObject)</p></td>
+                    <td><p>@Html.DisplayFor(model => m.typeCW)</p></td>
+                    <td><p>@Html.DisplayFor(model => m.description)</p></td>
+                    <td><p>@Html.DisplayFor(model => m.status)</p></td>
+                    <td><p><a href="/CO/COEdit/@m.Id">Редактировать</a></p></td>
+                    <td><p><a href="/CO/CODelete/@m.Id">Удалить</a></p></td>
+                </tr>
+            }
+        </table>
+        <br />
+        <ul class="btn btn-default btn-lg">
+            <p><a href="/CO/COAdd">Создать  новый Кадастровый обьект</a></p>
+        </ul>
+    </div>
+</body>
+</html>

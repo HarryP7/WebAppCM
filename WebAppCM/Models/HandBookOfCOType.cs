@@ -12,18 +12,18 @@ namespace WebAppCM.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class HandBookOfCOTypes
+    public partial class HandBookOfCOType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public HandBookOfCOTypes()
+        public HandBookOfCOType()
         {
-            this.CadastralObject = new HashSet<CadastralObject>();
+            this.CadastralObjects = new List<CadastralObject>();
         }
     
         public int Id { get; set; }
         public string tHCOname { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CadastralObject> CadastralObject { get; set; }
+        public virtual ICollection<CadastralObject> CadastralObjects { get; set; }
     }
 }

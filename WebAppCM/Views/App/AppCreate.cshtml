@@ -1,0 +1,35 @@
+﻿@model WebAppCM.Models.Application
+@{
+    ViewBag.Title = "AppCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Новая заявка</h2>
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(m => m.fk_customer, "Заказчик")
+    <br />
+    @Html.EditorFor(m => m.fk_customer)
+    <br /><br />
+    @Html.LabelFor(m => m.date, "Дата")
+    <br />
+    @Html.EditorFor(m => m.date)
+    <br /><br />
+    @Html.LabelFor(m => m.fk_cadastralObject, "Кадастровый обьект")
+    <br />
+    @Html.EditorFor(m => m.fk_cadastralObject)
+    <br /><br />
+    @Html.LabelFor(m => m.fk_typeCW, "Тип кадастровой работы")
+    <br />
+    @Html.EditorFor(m => m.fk_typeCW)
+    <br /><br />
+    @Html.LabelFor(m => m.description, "Описание")
+    <br />
+    @Html.EditorFor(m => m.description)
+    <br /><br />
+    @Html.LabelFor(m => m.fk_status, "Статус")
+    <br />
+    @Html.EditorFor(m => m.fk_status)
+    <br /><br />
+    <input type="submit" value="Добавить" />
+}

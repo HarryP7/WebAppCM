@@ -14,24 +14,26 @@ namespace WebAppCM.Models
     
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.Administrators = new HashSet<Administrator>();
+            this.Customers = new HashSet<Customer>();
+            this.Engineers = new HashSet<Engineer>();
+        }
+    
         public int Id { get; set; }
         public string surnameName { get; set; }
         public string name { get; set; }
         public string patronimic { get; set; }
         public string phone { get; set; }
         public string email { get; set; }
-        public User() { }
-        public User(string surnameName, string name, string patronimic)
-        {
-            this.surnameName = surnameName;
-            this.name = name;
-            this.patronimic = patronimic;
-        }
-        public User(string surnameName, string name, string patronimic, string phone, string email)
-            : this(surnameName, name, patronimic)
-        {
-            this.phone = phone;
-            this.email = email;
-        }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Administrator> Administrators { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Customer> Customers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Engineer> Engineers { get; set; }
     }
 }

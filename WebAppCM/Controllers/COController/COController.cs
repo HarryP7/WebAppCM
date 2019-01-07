@@ -3,33 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebAppCM.DAO;
 using WebAppCM.Models;
 
-namespace WebAppCM.Controllers.App
+namespace WebAppCM.Controllers.COController
 {
-    public class AppController : Controller
+    public class COController : Controller
     {
-        CMEntities db = new CMEntities();
-        // GET: App
-        [HttpGet]
-        public ActionResult MejPlan()
-        {   
-            return View();
+        private CMEntities db = new CMEntities();
+        private DAOCadastralObject dao = new DAOCadastralObject();
+        // GET: CO
+        public ActionResult ListCO()
+        {
+            var items = db.CadastralObjects;
+            items.ToList();
+            return View(dao.GetAllCO());
         }
 
-        // GET: App/Details/5
+        // GET: CO/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: App/Create
+        // GET: CO/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: App/Create
+        // POST: CO/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -45,13 +48,13 @@ namespace WebAppCM.Controllers.App
             }
         }
 
-        // GET: App/Edit/5
+        // GET: CO/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: App/Edit/5
+        // POST: CO/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -67,13 +70,13 @@ namespace WebAppCM.Controllers.App
             }
         }
 
-        // GET: App/Delete/5
+        // GET: CO/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: App/Delete/5
+        // POST: CO/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

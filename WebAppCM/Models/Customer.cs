@@ -12,27 +12,21 @@ namespace WebAppCM.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Customer : User
+    public partial class Customer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
-            this.Application = new HashSet<Application>();
+            this.Applications1 = new HashSet<Application>();
         }
     
         public int Idc { get; set; }
+        public int fk_User { get; set; }
         public string placeWork { get; set; }
         public string applications { get; set; }
-        public Customer(string surnameName, string name, string patronimic, string placeWork,  string applications) 
-            : base(surnameName, name, patronimic)
-        {
-            this.surnameName = surnameName;
-            this.name = name;
-            this.patronimic = patronimic;
-            this.placeWork = placeWork;
-            this.applications = applications;
-        }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Application> Application { get; set; }
+        public virtual ICollection<Application> Applications1 { get; set; }
+        public virtual User User { get; set; }
     }
 }

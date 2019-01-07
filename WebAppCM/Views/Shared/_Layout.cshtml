@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@*ViewBag.Title*@ Кадастровое управление</title>
+    <title>Кадастровое управление</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -22,7 +22,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Заявка", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Заявки", "ListApp", "App")</li>
+                    <li>@Html.ActionLink("Кадастровые объекты", "ListCO", "CO")</li>
                     <li>@Html.ActionLink("О сайте", "About", "Home")</li>
                     <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
                 </ul>
@@ -30,6 +31,7 @@
             </div>
         </div>
     </div>
+    <div id="header"><img src="/Content/images/Header.png" /></div>
     <div class="container body-content">
         @RenderBody()
         <hr />

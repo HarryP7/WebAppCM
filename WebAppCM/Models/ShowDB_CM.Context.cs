@@ -16,24 +16,25 @@ namespace WebAppCM.Models
     public partial class CMEntities : DbContext
     {
         public CMEntities()
-            : base("name=CMEntities")
-        {  }
+            : base("name=Cadastral_ManagementEntities")
+        {
+        }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Administrator> Administrator { get; set; }
-        public virtual DbSet<Application> Application { get; set; }
-        public virtual DbSet<CadastralObject> CadastralObject { get; set; }
-        public virtual DbSet<CadastralWork> CadastralWork { get; set; }
-        public virtual DbSet<Customer> Customer { get; set; }
-        public virtual DbSet<Engineer> Engineer { get; set; }
-        public virtual DbSet<HandBookOfCOTypes> HandBookOfCOTypes { get; set; }
+        public virtual DbSet<Administrator> Administrators { get; set; }
+        public virtual DbSet<Application> Applications { get; set; }
+        public virtual DbSet<CadastralObject> CadastralObjects { get; set; }
+        public virtual DbSet<CadastralWork> CadastralWorks { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Engineer> Engineers { get; set; }
+        public virtual DbSet<HandBookOfCOType> HandBookOfCOTypes { get; set; }
         public virtual DbSet<Status> Status { get; set; }
-        public virtual DbSet<Table> Table { get; set; }
-        public virtual DbSet<TypeCW> TypeCW { get; set; }
-        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Table> Tables { get; set; }
+        public virtual DbSet<TypeCW> TypeCWs { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

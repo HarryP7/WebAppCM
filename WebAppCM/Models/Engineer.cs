@@ -17,16 +17,18 @@ namespace WebAppCM.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Engineer()
         {
-            this.CadastralWork = new HashSet<CadastralWork>();
+            this.CadastralWorks = new HashSet<CadastralWork>();
         }
     
         public int Ide { get; set; }
-        public DateTime employmentDate { get; set; }
+        public int fk_User { get; set; }
+        public System.DateTime employmentDate { get; set; }
         public decimal salary { get; set; }
-        public Nullable<int> nomberComplCW { get; set; }
+        public int nomberComplCW { get; set; }
         public string jobStatus { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CadastralWork> CadastralWork { get; set; }
+        public virtual ICollection<CadastralWork> CadastralWorks { get; set; }
+        public virtual User User { get; set; }
     }
 }

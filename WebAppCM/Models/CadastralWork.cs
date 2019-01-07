@@ -14,21 +14,14 @@ namespace WebAppCM.Models
     
     public partial class CadastralWork
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CadastralWork()
-        {
-            this.Application = new HashSet<Application>();
-        }
-    
         public int Id { get; set; }
         public int fk_typeCW { get; set; }
+        public int fk_Application { get; set; }
         public int fk_engineer { get; set; }
-        public byte[] accounting { get; set; }
+        public string accounting { get; set; }
         public string description { get; set; }
         public decimal cost { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Application> Application { get; set; }
         public virtual Engineer Engineer { get; set; }
         public virtual TypeCW TypeCW { get; set; }
     }

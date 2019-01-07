@@ -20,7 +20,7 @@ namespace WebAppCM.DAO
                 while (reader.Read())
                 {
                     Customer cs = new Customer();
-                    cs.Id = Convert.ToInt32(reader["Id"]);
+                    cs.Idc = Convert.ToInt32(reader["Id"]);
                     cs.placeWork = Convert.ToString(reader["placeWork"]);
                     cs.applications = Convert.ToString(reader["applications"]);
                     csList.Add(cs);
@@ -46,7 +46,7 @@ namespace WebAppCM.DAO
             {
                 SqlCommand cmd = new SqlCommand("INSERT INTO Customer (Id, placeWork, applications) " +
                                                 "VALUES (@Id, @placeWork, @applications)", Connection);
-                cmd.Parameters.Add(new SqlParameter("@Title", records.Id));
+                cmd.Parameters.Add(new SqlParameter("@Title", records.Idc));
                 cmd.Parameters.Add(new SqlParameter("@Text", records.placeWork));
                 cmd.Parameters.Add(new SqlParameter("@ArticleRating", records.applications));
                 cmd.ExecuteNonQuery();

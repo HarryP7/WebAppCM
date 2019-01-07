@@ -277,13 +277,17 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CSS\styles.css" />
+    <Content Include="Content\images\Button.png" />
+    <Content Include="Content\images\Header.png" />
     <Content Include="Content\images\homes\home-1.jpg" />
     <Content Include="Content\images\homes\home-2.jpg" />
     <Content Include="Content\images\homes\home-3.jpg" />
+    <Content Include="Content\images\homes\home-4.jpg" />
     <Content Include="Content\images\homes\home.jpg" />
     <Content Include="Content\images\landPlots\land-1.jpg" />
     <Content Include="Content\images\landPlots\land-2.jpeg" />
     <Content Include="Content\images\landPlots\land.jpg" />
+    <Content Include="Content\images\Logo.jpg" />
     <Content Include="Content\JS\jquery-1.11.0.min.js" />
     <Content Include="Content\JS\scrypts.js" />
     <Content Include="Content\sql\SQLQuery2.sql" />

@@ -17,14 +17,14 @@
         <h3>Список Кадастровыx обьектов</h3>
         <table class="text-center table-bordered">
             <tr>
-                <td style="width: 2%;"><p>№</p></td>
-                <td style="width: 10%;"><p>Тип</p></td>
-                <td style="width: 8%;"><p>Номер</p></td>
-                <td style="width: 10%;"><p>Дата постановки</p></td>
-                <td style="width: 10%;"><p>Законный статус</p></td>
-                <td style="width: 12%;"><p>Адресс</p></td>
-                <td style="width: 8%;"><p>Площадь</p></td>
-                <td style="width: 10%;"><p>Стоимотсть</p></td>
+                <td style="width: 2%;"><p><b>№</b></p></td>
+                <td style="width: 10%;"><p><b>Тип</b></p></td>
+                <td style="width: 8%;"><p><b>Номер</b></p></td>
+                <td style="width: 10%;"><p><b>Дата постановки</b></p></td>
+                <td style="width: 10%;"><p><b>Законный статус</b></p></td>
+                <td style="width: 12%;"><p><b>Адресс</b></p></td>
+                <td style="width: 8%;"><p><b>Площадь, м²</b></p></td>
+                <td style="width: 10%;"><p><b>Стоимость, ₽</b></p></td>
                 <td style="width: 10%;"><p></p></td>
                 <td style="width: 6%;"><p></p></td>
             </tr>
@@ -39,15 +39,13 @@
                     <td><p>@Html.DisplayFor(model => m.address)</p></td>
                     <td><p>@Html.DisplayFor(model => m.square)</p></td>
                     <td><p>@Html.DisplayFor(model => m.cost)</p></td>
-                    <td><p><a href="/CO/COEdit/@m.Id">Редактировать</a></p></td>
+                    <td><p><a href="/CO/COEdit/@m.Id">Изменить</a></p></td>
                     <td><p><a href="/CO/CODelete/@m.Id">Удалить</a></p></td>
                 </tr>
             }
         </table>
         <br />
-        <ul class="btn btn-default btn-lg">
-            <p><a href="/CO/COAdd">Создать  новый Кадастровый обьект</a></p>
-        </ul>
+        <p><a href="/CO/COAdd" class="btn btn-primary btn-lg">Создать новый Кадастровый обьект</a></p>        
     </div>
 </body>
 </html>

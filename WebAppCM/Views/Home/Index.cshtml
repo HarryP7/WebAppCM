@@ -4,7 +4,7 @@
 
 <div class="jumbotron">
     <h1>Кадастровое управление</h1>
-    <p class="lead"> Кадастровой деятельностью являются выполнение работ в отношении недвижимого имущества в соответствии с
+    <p class="lead"><br />&emsp;&emsp;Кадастровой деятельностью являются выполнение работ в отношении недвижимого имущества в соответствии с
 установленными федеральным законом требованиями, в результате которых обеспечивается подготовка документов, содержащих необходимые 
     для осуществления государственного кадастрового учета недвижимого имущества (далее - кадастровый учет) сведения о таком 
     недвижимом имуществе (далее - кадастровые работы), и оказание услуг в установленных федеральным законом случаях. Специальным 
@@ -27,36 +27,41 @@
 о снятии с учета объекта капитального строительства. Результатом работ является <b>акт обследования</b>.</p>
 </div>
 <div class="col-lg-pull-1 text-center">
-    <p><h2><b>Отправить заявку сейчас</b></h2></p>
-    <nav>
-        <ul class="btn btn-default btn-lg">
-            <li> @Html.ActionLink("Отправить заявку сейчас", "TypeApp", "Application")</li>
+    @*<p><h2><b>Отправить заявку сейчас</b></h2></p>
+    <nav>*@
+        <p><a href="/App/AppCreate" class="btn btn-primary btn-lg">Отправить заявку сейчас &raquo;</a></p>
+        @*<ul class="btn btn-default btn-lg">
+            <li> @Html.ActionLink("Отправить заявку сейчас", "AppCreate", "App")</li>
         </ul>
-    </nav>
+    </nav>*@
 </div>
 <div class="row">
+    <div class="col-md-4">
+        <h2>Технический план</h2>
+        <p>здания, сооружения, помещения, квартиры.</p>
+       
+            @*<ul class="btn btn-default btn-lg">
+                <li> @Html.ActionLink("Технический план", "TehPlan", "Application")</li>
+            </ul>*@
+</div>
     <div class="col-md-4">
         <h2>Mежевой план</h2>
         <p>Для постановки земельного участка на государственный кадастровый учет и внесения изменений в кадастровый учет 
         необходим межевой план.
         </p>
         @*<p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>*@
-        <ul class="btn btn-default btn-lg">
+        @*<ul class="btn btn-default btn-lg">
                 <li> @Html.ActionLink("Mежевой план", "MejPlan", "Application")</li>
-        </ul>                                           @*"Login", "Account"*@
-    </div>
-    <div class="col-md-4">
-        <h2>Технический план</h2>
-        <p>здания, сооружения, помещения, квартиры.</p>
-        <ul class="btn btn-default btn-lg">
-                <li> @Html.ActionLink("Технический план", "TehPlan", "Application")</li>
-        </ul> 
+        </ul>*@                                           @*"Login", "Account"*@
     </div>
     <div class="col-md-4">
         <h2>Акт обследования</h2>
         <p>Для снятия объекта с кадастрового учета.</p>
-        <ul class="btn btn-default btn-lg">
+        @*<ul class="btn btn-default btn-lg">
                 <li> @Html.ActionLink("Акт обследования", "Index", "Home")</li>
-        </ul>
+        </ul>*@
     </div>
 </div>
+<td class="small_card">
+    <div id="header"><img src="~/Content/images/homes/home-4.jpg" /></div>
+</td>

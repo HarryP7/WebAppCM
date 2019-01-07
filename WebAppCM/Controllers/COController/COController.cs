@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -34,10 +35,10 @@ namespace WebAppCM.Controllers.COController
 
         // POST: CO/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult COCreate(FormCollection collection)
         {
             try
-            {
+            { 
                 // TODO: Add insert logic here
 
                 return RedirectToAction("Index");
@@ -49,47 +50,54 @@ namespace WebAppCM.Controllers.COController
         }
 
         // GET: CO/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public ActionResult COEdit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            CadastralObject co = db.CadastralObjects.Find(id);
+            if (co != null)
+            {
+                return View(co);
+            }
+            return HttpNotFound();
         }
 
         // POST: CO/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult COEdit(CadastralObject co)
         {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            db.Entry(co).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("ListCO");
         }
 
         // GET: CO/Delete/5
-        public ActionResult Delete(int id)
+        [HttpGet]
+        public ActionResult CODelete(int id)
         {
-            return View();
+            CadastralObject co = db.CadastralObjects.Find(id);
+            if (co == null)
+            {
+                return HttpNotFound();
+            }
+            return View(co);
         }
 
         // POST: CO/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("CODelete")]
+        public ActionResult CODeleteConfirmed(int id)
         {
-            try
+            CadastralObject co = db.CadastralObjects.Find(id);
+            if (co == null)
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                return HttpNotFound();
             }
-            catch
-            {
-                return View();
-            }
+            db.CadastralObjects.Remove(co);
+            db.SaveChanges();
+            return RedirectToAction("ListCO");
         }
     }
 }

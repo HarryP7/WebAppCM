@@ -3,33 +3,58 @@
     ViewBag.Title = "AppCreate";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+        .MyMarginLeft { margin-left: 30%;    }
+        .MyMarginRight { margin-right: 20%;    }
+    </style>
+    <p class="MyMarginLeft MyMarginRight">
+        <h2>Новая заявка</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.LabelFor(m => m.fk_customer, "Заказчик")
+            <br />
+            @Html.EditorFor(m => m.fk_customer)
+            <br /><br />
+            @Html.LabelFor(m => m.date, "Дата")
+            <br />
+            @Html.EditorFor(m => @DateTime.Now.Date)
+            <br /><br />
+            @Html.LabelFor(m => m.fk_cadastralObject, "Кадастровый обьект")
+            <br />
+            @Html.EditorFor(m => m.fk_cadastralObject)
+            <br /><br />
+            @Html.LabelFor(m => m.fk_typeCW, "Тип кадастровой работы")
+            <br />
+            @Html.EditorFor(m => m.fk_typeCW)
+            <br /><br />
+            @Html.LabelFor(m => m.description, "Описание")
+            <br />
+            @Html.EditorFor(m => m.description)
+            @*<br /><br />
+            @Html.LabelFor(m => m.fk_status, "Статус")
+            <br />
+            @Html.EditorFor(m => m.fk_status)*@
+            <br /><br />
+            <input type="submit" value="Добавить" />
+        }
+    </p>
+      @*  <br /><br />
+    @using (Html.BeginForm("AppCreate", "App", FormMethod.Post))
+    {
+        <input type="hidden" value="@ViewBag.Customer.User.surnameName" name="surnameName" />
+        <input type="hidden" value="@ViewBag.date" name="date" />
+        <input type="hidden" value="@ViewBag.CadastralObject.HandBookOfCOType.tHCOname" name="CadastralObject" />
+        <input type="hidden" value="@ViewBag.TypeCW.tCWname" name="TypeCW" />
+        <input type="hidden" value="@ViewBag.description" name="description" />
+        <input type="hidden" value="@ViewBag.Status.sName" name="Status" />
 
-<h2>Новая заявка</h2>
-@using (Html.BeginForm())
-{
-    @Html.LabelFor(m => m.fk_customer, "Заказчик")
-    <br />
-    @Html.EditorFor(m => m.fk_customer)
-    <br /><br />
-    @Html.LabelFor(m => m.date, "Дата")
-    <br />
-    @Html.EditorFor(m => m.date)
-    <br /><br />
-    @Html.LabelFor(m => m.fk_cadastralObject, "Кадастровый обьект")
-    <br />
-    @Html.EditorFor(m => m.fk_cadastralObject)
-    <br /><br />
-    @Html.LabelFor(m => m.fk_typeCW, "Тип кадастровой работы")
-    <br />
-    @Html.EditorFor(m => m.fk_typeCW)
-    <br /><br />
-    @Html.LabelFor(m => m.description, "Описание")
-    <br />
-    @Html.EditorFor(m => m.description)
-    <br /><br />
-    @Html.LabelFor(m => m.fk_status, "Статус")
-    <br />
-    @Html.EditorFor(m => m.fk_status)
-    <br /><br />
-    <input type="submit" value="Добавить" />
-}
+        <dt>Заказчик: @ViewBag.Customer.User.surnameName</dt>
+        <dt>Дата: @ViewBag.date</dt>
+        <dt>Кадастровый обьект: @ViewBag.CadastralObject.HandBookOfCOType.tHCOname</dt>
+        <dt>Тип кадастровой работы: @ViewBag.TypeCW.tCWname)</dt>
+        <dt>Описание: @ViewBag.description)</dt>
+        <dt>Статус: Ожидание оплаты)</dt>
+
+
+        <input type="submit" value="Отправить" />
+    }*@

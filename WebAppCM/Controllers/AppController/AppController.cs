@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -25,19 +27,34 @@ namespace WebAppCM.Controllers.AppController
         {
             return View();
         }
-
+        private ApplicationUserManager UserManager
+        {   get
+            {   return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+        }
         // GET: App/Create
         [HttpGet]
-        public ActionResult AppCreate()
+        public ActionResult AppCreate(int id)
         {
-            return View();
+            ApplicationUser user = UserManager.FindByEmail(User.Identity.Name);
+            if (user != null)
+            {
+                Application app = new Application();
+                ViewBag.User = user;
+                return View();
+            };
+            return RedirectToAction("Login", "Account");
         }
 
         // POST: App/Create
         [HttpPost]
-        public ActionResult AppCreate(Application App)
+        public ActionResult AppCreate(Application m)
         {
-            db.Applications.Add(App);
+            //Application app = new Application()
+            //{
+
+            //}
+            //db.Applications.Add(App);
             db.SaveChanges();
             return RedirectToAction("AppList");
         }

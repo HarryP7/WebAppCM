@@ -31,7 +31,7 @@ namespace WebAppCM.Models
         public virtual DbSet<CadastralWork> CadastralWorks { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Engineer> Engineers { get; set; }
-        public virtual DbSet<HandBookOfCOType> HandBookOfCOTypes { get; set; }
+        public virtual DbSet<HandBookOfCOType> typeCOs { get; set; }
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<Table> Tables { get; set; }
         public virtual DbSet<TypeCW> TypeCWs { get; set; }

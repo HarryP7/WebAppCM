@@ -65,6 +65,14 @@ namespace WebAppCM.Models
     public class RegisterViewModel
     {
         [Required]
+        public string surname { get; set; } //фамилия
+        [Required]
+        public string name { get; set; } //имя
+        [Required]
+        public string patronymic { get; set; } //отчество
+        [Required]
+        public string PhoneNumber { get; set; }
+        [Required]
         [EmailAddress]
         [Display(Name = "Адрес электронной почты")]
         public string Email { get; set; }

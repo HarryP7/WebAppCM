@@ -58,8 +58,8 @@
       <HintPath>..\packages\Microsoft.Web.Xdt.2.1.1\lib\net40\Microsoft.Web.XmlTransform.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NuGet.PackageManagement, Version=4.7.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -198,9 +198,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AppController\AppController.cs" />
     <Compile Include="Controllers\COController\COController.cs" />
+    <Compile Include="Controllers\COTypeController\COTypeController.cs" />
     <Compile Include="Controllers\Pr\HomeControllerPr.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -369,6 +369,9 @@
     <Content Include="Views\App\ListApp.cshtml" />
     <Content Include="Views\CO\ListCO.cshtml" />
     <Content Include="Views\App\AppCreate.cshtml" />
+    <Content Include="Views\CO\COCreate.cshtml" />
+    <Content Include="Views\COType\ShowHandBookOfCOType.cshtml" />
+    <Content Include="Views\COType\typeCODetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

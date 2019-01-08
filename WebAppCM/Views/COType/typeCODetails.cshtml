@@ -1,0 +1,28 @@
+﻿@model WebAppCM.Models.HandBookOfCOType
+
+@{
+    ViewBag.Title = "Тип @Model.tHCOname";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>typeCODetails</h2>
+
+<div>
+    <h4>Тип @Model.tHCOname</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dd>
+            <ul>
+                @foreach (var co in Model.CadastralObjects)
+                {
+                    <li>Стоимость: @co.cost (Адресс: @co.address)</li>
+                    <li>Дата: @co.dateOfEntry (Номер: @co.cadastralNumber)</li>
+                }
+            </ul>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

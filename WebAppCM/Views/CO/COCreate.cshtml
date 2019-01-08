@@ -1,0 +1,24 @@
+﻿@model WebAppCM.Models.CadastralObject
+@{
+    ViewBag.Title = "Новый Кадастровый обьект";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Новый Кадастровый обьект</h2><hr />
+@using (Html.BeginForm())
+{
+    <dt>@Html.LabelFor(m => m.fk_tipeCO, "Тип кадастрового объекта: ")
+        @Html.DropDownListFor(m => m.fk_tipeCO, ViewBag.TypeCO as SelectList)</dt><br /><br />
+    <dt>@Html.LabelFor(m => m.cadastralNumber, "Кадастровый номер: ")
+        @Html.EditorFor(m => m.cadastralNumber)</dt><br /><br />
+    <dt>@Html.LabelFor(m => m.dateOfEntry, "Дата внесения: ")
+        @Html.EditorFor(m => @DateTime.Now)</dt><br /><br />
+    <dt>Правовой статус: @Html.EditorFor(m => m.legalStatus)</dt><br /><br />
+    <dt>Адрес: @Html.EditorFor(m => m.address)</dt><br /><br />
+    <dt>@Html.LabelFor(m => m.square, "Площадь: ")
+        @Html.EditorFor(m => m.square)</dt><br /><br />
+    <dt>@Html.LabelFor(m => m.cost, "Стоимость")
+        @Html.EditorFor(m => m.cost)</dt><br /><br />
+        <input type="submit" value="Добавить" />
+ }
+

@@ -21,7 +21,7 @@ namespace WebAppCM.Models
         }
     
         public int Id { get; set; }
-        public int fk_tipeCO { get; set; }
+        public int? fk_tipeCO { get; set; }
         public string type { get; set; }
         public string cadastralNumber { get; set; }
         public System.DateTime dateOfEntry { get; set; }
@@ -31,7 +31,9 @@ namespace WebAppCM.Models
         public string subPreview { get; set; }
         public double square { get; set; }
         public decimal cost { get; set; }
-    
+
+        public int? coTypeId { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Application> Applications { get; set; }
         public virtual HandBookOfCOType HandBookOfCOType { get; set; }

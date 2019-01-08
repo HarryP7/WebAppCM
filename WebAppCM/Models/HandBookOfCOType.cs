@@ -25,5 +25,10 @@ namespace WebAppCM.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CadastralObject> CadastralObjects { get; set; }
+        public IEnumerable<CadastralObject> co;
+        public IEnumerable<CadastralObject> CO {
+            get { return co; }
+            set{co = CadastralObjects;} 
+        }
     }
 }

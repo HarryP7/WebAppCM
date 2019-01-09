@@ -210,66 +210,24 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="DAO\DAO.cs" />
-    <Compile Include="DAO\DAOApp.cs" />
-    <Compile Include="DAO\DAOCadastralObject.cs" />
-    <Compile Include="DAO\DAOCustomer.cs" />
-    <Compile Include="DAO\DAOUser.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Logger.cs" />
+    <Compile Include="Migrations\201901090034515_InitialDB.cs" />
+    <Compile Include="Migrations\201901090034515_InitialDB.Designer.cs">
+      <DependentUpon>201901090034515_InitialDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Administrator.cs">
-      <DependentUpon>ShowDB_CM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Application.cs">
-      <DependentUpon>ShowDB_CM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CadastralObject.cs">
-      <DependentUpon>ShowDB_CM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CadastralWork.cs">
-      <DependentUpon>ShowDB_CM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Customer.cs">
-      <DependentUpon>ShowDB_CM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Engineer.cs">
-      <DependentUpon>ShowDB_CM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\HandBookOfCOType.cs">
-      <DependentUpon>ShowDB_CM.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Application.cs" />
+    <Compile Include="Models\CadastralObject.cs" />
+    <Compile Include="Models\CadastralWork.cs" />
+    <Compile Include="Models\HandBookOfCOType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\ShowDB_CM.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ShowDB_CM.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ShowDB_CM.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ShowDB_CM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ShowDB_CM.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ShowDB_CM.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Status.cs">
-      <DependentUpon>ShowDB_CM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Table.cs">
-      <DependentUpon>ShowDB_CM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TypeCW.cs">
-      <DependentUpon>ShowDB_CM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User.cs">
-      <DependentUpon>ShowDB_CM.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\TypeCW.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -296,25 +254,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\ShowDB_CM.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ShowDB_CM.edmx</DependentUpon>
-      <LastGenOutput>ShowDB_CM.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ShowDB_CM.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ShowDB_CM.edmx</DependentUpon>
-      <LastGenOutput>ShowDB_CM.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\ShowDB_CM.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ShowDB_CM.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ShowDB_CM.edmx.diagram">
-      <DependentUpon>ShowDB_CM.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -386,6 +327,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201901090034515_InitialDB.resx">
+      <DependentUpon>201901090034515_InitialDB.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -11,24 +11,26 @@ namespace WebAppCM.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Application
     {
+        [Key]
         public int Id { get; set; }
-        public int fk_customer { get; set; }
-        public string customerFI { get; set; }
+        [ForeignKey(nameof(User))]
+        public string fk_User { get; set; }
         public System.DateTime date { get; set; }
+        [ForeignKey(nameof(CadastralObject))]
         public int fk_cadastralObject { get; set; }
-        public string cadastralObject { get; set; }
+        [ForeignKey(nameof(TypeCW))]
         public int fk_typeCW { get; set; }
-        public string typeCW { get; set; }
         public string description { get; set; }
+        [ForeignKey(nameof(Status))]
         public int fk_status { get; set; }
-        public string status { get; set; }
-
 
         public virtual CadastralObject CadastralObject { get; set; }
-        public virtual Customer Customer { get; set; }
+        public virtual ApplicationUser User { get; set; }
         public virtual Status Status { get; set; }
         public virtual TypeCW TypeCW { get; set; }
     }

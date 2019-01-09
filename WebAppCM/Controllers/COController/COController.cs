@@ -4,14 +4,13 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WebAppCM.DAO;
 using WebAppCM.Models;
 
 namespace WebAppCM.Controllers.COController
 {
     public class COController : Controller
     {
-        private CMEntities db = new CMEntities();
+        private ApplicationDbContext db = new ApplicationDbContext();
         //private DAOCadastralObject dao = new DAOCadastralObject();
         // GET: CO
         public ActionResult ListCO()
@@ -22,28 +21,19 @@ namespace WebAppCM.Controllers.COController
             return View(items.ToList());
         }
         // GET: CO/Details/5
-        public ActionResult typeCODetails(int? id)
+        public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return HttpNotFound();
-            }
-            HandBookOfCOType typeCO = db.typeCOs.Find(id);
-            if (typeCO == null)
-            {
-                return HttpNotFound();
-            }
-            typeCO.co = db.CadastralObjects.Where(m => m.fk_tipeCO == typeCO.Id);
-            return View(typeCO);
+            return View();
         }
 
         // GET: CO/Create
        // [Authorize(Roles = "Admin, Engineer")]
+       [HttpGet]
         public ActionResult COCreate()
         {
             // Формируем список типов КО для передачи в представление
-            SelectList type = new SelectList(db.typeCOs, "Id", "tHCOname");
-            ViewBag.TipeCO = type;
+            SelectList type = new SelectList(db.HandBookOfCOTypes, "Id", "tHCOname");
+            ViewBag.HandBookOfCOTypes = type;
             return View();
         }
 
@@ -51,8 +41,18 @@ namespace WebAppCM.Controllers.COController
         [HttpPost]
         public ActionResult COCreate(CadastralObject co)
         {
+            CadastralObject addCO = new CadastralObject
+            {
+                fk_typeCO = co.fk_typeCO,
+                cadastralNumber = co.cadastralNumber,
+                dateOfEntry = co.dateOfEntry,
+                legalStatus = co.legalStatus,
+                address = co.address,
+                square = co.square,
+                cost = co.cost
+            };
             //Добавляем КО в таблицу
-            db.CadastralObjects.Add(co);
+            db.CadastralObjects.Add(addCO);
             db.SaveChanges();
             return RedirectToAction("ListCO");
         }
@@ -70,7 +70,7 @@ namespace WebAppCM.Controllers.COController
             if (co != null)
             {
                 // Создаем список команд для передачи в представление
-                SelectList teams = new SelectList(db.typeCOs, "Id", "Name", co.fk_tipeCO);
+                SelectList teams = new SelectList(db.HandBookOfCOTypes, "Id", "Name", co.fk_typeCO);
                 ViewBag.Teams = teams;
                 return View(co);
             }

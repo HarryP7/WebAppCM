@@ -11,17 +11,15 @@ namespace WebAppCM.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class CadastralObject
-    {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CadastralObject()
-        {
-            this.Applications = new List<Application>();
-        }
-    
+    {          
+        [Key]
         public int Id { get; set; }
-        public int? fk_tipeCO { get; set; }
+        [ForeignKey(nameof(HandBookOfCOType))]
+        public int? fk_typeCO { get; set; }
         public string type { get; set; }
         public string cadastralNumber { get; set; }
         public System.DateTime dateOfEntry { get; set; }
@@ -30,12 +28,10 @@ namespace WebAppCM.Models
         public string preview { get; set; }
         public string subPreview { get; set; }
         public double square { get; set; }
-        public decimal cost { get; set; }
+        public decimal cost { get; set; }        
 
-        public int? coTypeId { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Application> Applications { get; set; }
+        [InverseProperty(nameof(Application.CadastralObject))]
+        public virtual ICollection<Application> Applications { get; set; } = new HashSet<Application>();
         public virtual HandBookOfCOType HandBookOfCOType { get; set; }
     }
 }

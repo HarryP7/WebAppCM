@@ -11,22 +11,18 @@ namespace WebAppCM.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class TypeCW
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TypeCW()
-        {
-            this.Applications = new HashSet<Application>();
-            this.CadastralWorks = new HashSet<CadastralWork>();
-        }
-    
+        [Key]
         public int Id { get; set; }
         public string tCWname { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Application> Applications { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CadastralWork> CadastralWorks { get; set; }
+        [InverseProperty(nameof(Application.TypeCW))]        
+        public virtual ICollection<Application> Applications { get; set; } = new HashSet<Application>();
+        [InverseProperty(nameof(CadastralWork.TypeCW))]
+        public virtual ICollection<CadastralWork> CadastralWorks { get; set; } = new HashSet<CadastralWork>();
     }
 }

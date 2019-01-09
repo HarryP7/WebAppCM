@@ -11,18 +11,22 @@ namespace WebAppCM.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class CadastralWork
     {
+        [Key]
         public int Id { get; set; }
+        [ForeignKey(nameof(TypeCW))]
         public int fk_typeCW { get; set; }
-        public int fk_Application { get; set; }
-        public int fk_engineer { get; set; }
+        [ForeignKey(nameof(User))]
+        public string fk_User { get; set; }
         public string accounting { get; set; }
         public string description { get; set; }
         public decimal cost { get; set; }
-    
-        public virtual Engineer Engineer { get; set; }
+
+        public virtual ApplicationUser User { get; set; }
         public virtual TypeCW TypeCW { get; set; }
     }
 }

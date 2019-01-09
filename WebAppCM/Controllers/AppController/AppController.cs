@@ -5,21 +5,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WebAppCM.DAO;
 using WebAppCM.Models;
 
 namespace WebAppCM.Controllers.AppController
 {
     public class AppController : Controller
     {
-        private CMEntities db = new CMEntities();
-        private DAOApp dao = new DAOApp();
+        private ApplicationDbContext db = new ApplicationDbContext();
+        //private DAOApp dao = new DAOApp();
         // GET: App
         [HttpGet]
         public ActionResult ListApp()
         {
             var items = db.Applications;
-            return View(dao.GetAllApp());
+            //dao.GetAllApp();
+            return View(items);
         }
 
         // GET: App/Details/5

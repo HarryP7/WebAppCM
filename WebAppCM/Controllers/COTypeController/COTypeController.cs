@@ -9,11 +9,11 @@ namespace WebAppCM.Controllers.COTypeController
 {
     public class COTypeController : Controller
     {
-        private CMEntities db = new CMEntities();
+        private ApplicationDbContext db = new ApplicationDbContext();
         // GET: COType        
         public ActionResult ShowHandBookOfCOType()
         {
-            var items = db.typeCOs;
+            var items = db.HandBookOfCOTypes;
             return View(items.ToList());
         }
         // GET: COType/Details/5
@@ -23,12 +23,12 @@ namespace WebAppCM.Controllers.COTypeController
             {
                 return HttpNotFound();
             }
-            HandBookOfCOType typeCO = db.typeCOs.Find(id);
+            HandBookOfCOType typeCO = db.HandBookOfCOTypes.Find(id);
             if (typeCO == null)
             {
                 return HttpNotFound();
             }
-            typeCO.co = db.CadastralObjects.Where(m => m.coTypeId == typeCO.Id);
+            typeCO.co = db.CadastralObjects.Where(m => m.fk_typeCO == typeCO.Id);
             return View(typeCO);
         }
 

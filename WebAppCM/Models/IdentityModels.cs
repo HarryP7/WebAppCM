@@ -4,21 +4,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAppCM.Models
 {
     // Чтобы добавить данные профиля для пользователя, можно добавить дополнительные свойства в класс ApplicationUser. Дополнительные сведения см. по адресу: http://go.microsoft.com/fwlink/?LinkID=317594.
     public class ApplicationUser : IdentityUser
-    {
-        public string surname { get; set; } //фамилия
-        public string name { get; set; } //имя
-        public string patronymic { get; set; } //отчество
-
-        public ICollection<Application> app { get; set; }
-        public ApplicationUser()
-        {
-            app = new List<Application>();
-        }
+    {        
+        public string surname { get; set; }
+        public string name { get; set; }
+        public string patronimic { get; set; }
+        
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Обратите внимание, что authenticationType должен совпадать с типом, определенным в CookieAuthenticationOptions.AuthenticationType
@@ -34,6 +30,13 @@ namespace WebAppCM.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+        
+        public virtual DbSet<Application> Applications { get; set; }
+        public virtual DbSet<CadastralObject> CadastralObjects { get; set; }
+        public virtual DbSet<HandBookOfCOType> HandBookOfCOTypes { get; set; }
+        public virtual DbSet<CadastralWork> CadastralWorks { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<TypeCW> TypeCWs { get; set; }
 
         public static ApplicationDbContext Create()
         {

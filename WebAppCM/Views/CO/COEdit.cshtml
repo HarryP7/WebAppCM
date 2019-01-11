@@ -1,0 +1,37 @@
+﻿@model WebAppCM.Models.CadastralObject
+@{
+    ViewBag.Title = "Изменение Кадастрового обьекта";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Изменение Кадастрового обьекта</h2><hr />
+@using (Html.BeginForm("COEdit", "CO", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-2">
+            <b> №
+                Тип кадастрового объекта:<br /><br />
+                Кадастровый номер:<br /><br />
+                Дата внесения:<br /><br />
+                Правовой статус:<br /><br />
+                Адрес:<br /><br />
+                Площадь:<br /><br />
+                Стоимость:
+            </b><br /><br />
+        </div>
+        <div class="col-md-2">
+            @Html.EditorFor(m => m.Id)<br /><br />
+            @Html.DropDownListFor(m => m.fk_typeCO, ViewBag.HandBookOfCOTypes as SelectList)<br /><br />
+            @Html.EditorFor(m => m.cadastralNumber)<br /><br />
+            @Html.EditorFor(m => m.dateOfEntry)<br /><br />
+            @Html.EditorFor(m => m.legalStatus)<br /><br />
+            @Html.EditorFor(m => m.address)<br /><br />
+            @Html.EditorFor(m => m.square)<br /><br />
+            @Html.EditorFor(m => m.cost)<br /><br />
+        </div>
+    </div>
+<div>
+    <input type="submit" value="Сохранить" class="btn btn-primary btn-lg" />&emsp;
+    <a href="/CO/ListCO" class="btn btn-primary btn-lg">&laquo; Вернуться к списку Кадастровыx обьектов</a>
+</div>
+}

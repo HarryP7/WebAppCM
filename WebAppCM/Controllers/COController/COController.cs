@@ -11,12 +11,10 @@ namespace WebAppCM.Controllers.COController
     public class COController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        //private DAOCadastralObject dao = new DAOCadastralObject();
         // GET: CO
+        [HttpGet, Authorize(Roles = "Admin, Engineer,Castomer")]
         public ActionResult ListCO()
         {
-            //var items = db.CadastralObjects;
-            //dao.GetAllCO();
             var items = db.CadastralObjects.Include(p => p.HandBookOfCOType);
             return View(items.ToList());
         }
@@ -27,8 +25,7 @@ namespace WebAppCM.Controllers.COController
         }
 
         // GET: CO/Create
-       // [Authorize(Roles = "Admin, Engineer")]
-       [HttpGet]
+        [HttpGet, Authorize(Roles = "Admin, Engineer")]       
         public ActionResult COCreate()
         {
             // Формируем список типов КО для передачи в представление
@@ -41,37 +38,27 @@ namespace WebAppCM.Controllers.COController
         [HttpPost]
         public ActionResult COCreate(CadastralObject co)
         {
-            CadastralObject addCO = new CadastralObject
-            {
-                fk_typeCO = co.fk_typeCO,
-                cadastralNumber = co.cadastralNumber,
-                dateOfEntry = co.dateOfEntry,
-                legalStatus = co.legalStatus,
-                address = co.address,
-                square = co.square,
-                cost = co.cost
-            };
             //Добавляем КО в таблицу
-            db.CadastralObjects.Add(addCO);
+            db.CadastralObjects.Add(co);
             db.SaveChanges();
             return RedirectToAction("ListCO");
         }
 
         // GET: CO/Edit/5
-        [HttpGet/*, Authorize(Roles = "Admin, Engineer")*/]
+        [HttpGet, Authorize(Roles = "Admin, Engineer")]
         public ActionResult COEdit(int? id)
         {
             if (id == null)
             {
                 return HttpNotFound();
             }
-            // Находим в бд футболиста
+            // Находим в бд выбранный KO
             CadastralObject co = db.CadastralObjects.Find(id);
             if (co != null)
             {
-                // Создаем список команд для передачи в представление
-                SelectList teams = new SelectList(db.HandBookOfCOTypes, "Id", "Name", co.fk_typeCO);
-                ViewBag.Teams = teams;
+                // Создаем список типо КО для передачи в представление
+                SelectList type = new SelectList(db.HandBookOfCOTypes, "Id", "tHCOname", co.fk_typeCO);
+                ViewBag.HandBookOfCOTypes = type;
                 return View(co);
             }
             return RedirectToAction("ListCO");            
@@ -87,7 +74,7 @@ namespace WebAppCM.Controllers.COController
         }
 
         // GET: CO/Delete/5
-        [HttpGet/*, Authorize(Roles = "Admin, Engineer")*/]
+        [HttpGet, Authorize(Roles = "Admin, Engineer")]
         public ActionResult CODelete(int id)
         {
             CadastralObject co = db.CadastralObjects.Find(id);

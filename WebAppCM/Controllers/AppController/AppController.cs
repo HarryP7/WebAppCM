@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,11 +15,10 @@ namespace WebAppCM.Controllers.AppController
         private ApplicationDbContext db = new ApplicationDbContext();
         //private DAOApp dao = new DAOApp();
         // GET: App
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Admin, Engineer,Castomer")]
         public ActionResult ListApp()
         {
-            var items = db.Applications;
-            //dao.GetAllApp();
+            var items = db.Applications.Include(p => p.CadastralObject.HandBookOfCOType).Include(p => p.User).Include(p => p.Status).Include(p => p.TypeCW);
             return View(items);
         }
 
@@ -27,25 +27,30 @@ namespace WebAppCM.Controllers.AppController
         {
             return View();
         }
-        private ApplicationUserManager UserManager
-        {   get
-            {   return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+        private ApplicationUserManager UserManager{
+            get{
+                return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
         }
         // GET: App/Create
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Admin, Engineer,Castomer")]
         public ActionResult AppCreate(int id)
         {
             ApplicationUser user = UserManager.FindByEmail(User.Identity.Name);
             if (user != null)
             {
-                Application app = new Application();
                 ViewBag.User = user;
+                // Формируем список типов КО для передачи в представление
+                SelectList typeCO = new SelectList(db.HandBookOfCOTypes, "Id", "tHCOname");
+                ViewBag.HandBookOfCOTypes = typeCO;
+                // Формируем список типов КО для передачи в представление
+                SelectList typeCW = new SelectList(db.TypeCWs, "Id", "tCWname");
+                ViewBag.TypeCW = typeCW;
+                ViewBag.Satus = 2;
                 return View();
             };
             return RedirectToAction("Login", "Account");
         }
-
         // POST: App/Create
         [HttpPost]
         public ActionResult AppCreate(Application m)
@@ -60,6 +65,7 @@ namespace WebAppCM.Controllers.AppController
         }
 
         // GET: App/Edit/5
+        [HttpGet, Authorize(Roles = "Admin, Engineer,Castomer")]
         public ActionResult Edit(int id)
         {
             return View();
@@ -82,6 +88,7 @@ namespace WebAppCM.Controllers.AppController
         }
 
         // GET: App/Delete/5
+        [HttpGet, Authorize(Roles = "Admin, Engineer,Castomer")]
         public ActionResult Delete(int id)
         {
             return View();

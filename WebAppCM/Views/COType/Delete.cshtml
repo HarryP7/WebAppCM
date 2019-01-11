@@ -1,0 +1,24 @@
+﻿@model WebAppCM.Models.HandBookOfCOType
+@{
+    ViewBag.Title = "Удаление типа";
+}
+
+<h2>Удаление типа</h2>
+
+<h3>Вы уверены, что хотите удалить этот тип?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Имя: </dt>
+        <dd>@Html.DisplayFor(model => model.tHCOname) </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-primary btn-lg" />&emsp;
+                <a href="/COType/ShowHandBookOfCOType" class="btn btn-primary btn-lg">&laquo; Вернуться к Справочнику типов</a>
+        </div>
+    }
+</div>

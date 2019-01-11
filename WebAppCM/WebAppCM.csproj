@@ -201,7 +201,6 @@
     <Compile Include="Controllers\AppController\AppController.cs" />
     <Compile Include="Controllers\COController\COController.cs" />
     <Compile Include="Controllers\COTypeController\COTypeController.cs" />
-    <Compile Include="Controllers\Pr\HomeControllerPr.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -214,9 +213,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Logger.cs" />
-    <Compile Include="Migrations\201901090034515_InitialDB.cs" />
-    <Compile Include="Migrations\201901090034515_InitialDB.Designer.cs">
-      <DependentUpon>201901090034515_InitialDB.cs</DependentUpon>
+    <Compile Include="Migrations\201901101519094_InitialDB.cs" />
+    <Compile Include="Migrations\201901101519094_InitialDB.Designer.cs">
+      <DependentUpon>201901101519094_InitialDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -304,15 +303,17 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Application\TehPlan.cshtml" />
-    <Content Include="Views\Application\MejPlan.cshtml" />
-    <Content Include="Views\Application\TypeApp.cshtml" />
     <Content Include="Views\App\ListApp.cshtml" />
     <Content Include="Views\CO\ListCO.cshtml" />
     <Content Include="Views\App\AppCreate.cshtml" />
     <Content Include="Views\CO\COCreate.cshtml" />
     <Content Include="Views\COType\ShowHandBookOfCOType.cshtml" />
     <Content Include="Views\COType\typeCODetails.cshtml" />
+    <Content Include="Views\CO\COEdit.cshtml" />
+    <Content Include="Views\CO\CODelete.cshtml" />
+    <Content Include="Views\COType\Edit.cshtml" />
+    <Content Include="Views\COType\Create.cshtml" />
+    <Content Include="Views\COType\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -329,8 +330,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901090034515_InitialDB.resx">
-      <DependentUpon>201901090034515_InitialDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901101519094_InitialDB.resx">
+      <DependentUpon>201901101519094_InitialDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

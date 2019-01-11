@@ -19,7 +19,8 @@ namespace WebAppCM.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //
-            //context.Applications.Add(new Application { })
+            //context.TypeCWs.Add(new HandBookOfCOType {Id=5, tHCOname="Земельный участок" })
+
             //    context.People.AddOrUpdate(
             //      p => p.FullName,
             //      new Person { FullName = "Andrew Peters" },

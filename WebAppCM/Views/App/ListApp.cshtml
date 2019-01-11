@@ -24,26 +24,25 @@
                 <td style="width: 12%;"><p><b>Тип КР</b></p></td>
                 <td style="width: 10%;"><p><b>Описание</b></p></td>
                 <td style="width: 12%;"><p><b>Статус</b></p></td>
-                <td style="width: 10%;"><p></p></td>
-                <td style="width: 10%;"><p></p></td>
+                <td style="width: 13%;"><p><b>Опции</b></p></td>
             </tr>
             @foreach (var m in Model)
             {
                 <tr>
                     <td><p>@Html.DisplayFor(model => m.Id)</p></td>
-                    <td><p>@Html.DisplayFor(model => m.customerFI)</p></td>
+                    <td><p>@m.User.surname @m.User.name @m.User.patronimic</p></td>
                     <td><p>@Html.DisplayFor(model => m.date)</p></td>
-                    <td><p>@Html.DisplayFor(model => m.cadastralObject)</p></td>
-                    <td><p>@Html.DisplayFor(model => m.typeCW)</p></td>
+                    <td><p>@Html.DisplayFor(model => m.CadastralObject.HandBookOfCOType.tHCOname)</p></td>
+                    <td><p>@Html.DisplayFor(model => m.TypeCW.tCWname)</p></td>
                     <td><p>@Html.DisplayFor(model => m.description)</p></td>
-                    <td><p>@Html.DisplayFor(model => m.status)</p></td>
-                    <td><p><a href="/App/AppEdit/@m.Id">Изменить</a></p></td>
-                    <td><p><a href="/App/AppDelete/@m.Id">Удалить</a></p></td>
+                    <td><p>@Html.DisplayFor(model => m.Status.sName)</p></td>
+                    <td><p><a href="/App/AppEdit/@m.Id" class="btn btn-primary btn-sm">Изменить</a>
+                        <a href="/App/AppDelete/@m.Id" class="btn btn-primary btn-sm">Удалить</a></p></td>
                 </tr>
             }
         </table>
         <br />
-            <p><a href="/App/AppCreate" class="btn btn-primary btn-lg">Создать  новую заявку</a></p>
+            <a href="/App/AppCreate" class="btn btn-primary btn-lg">Создать  новую заявку</a>
       </div>
 </body>
 </html>

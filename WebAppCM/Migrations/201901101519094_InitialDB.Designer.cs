@@ -13,7 +13,7 @@ namespace WebAppCM.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201901090034515_InitialDB"; }
+            get { return "201901101519094_InitialDB"; }
         }
         
         string IMigrationMetadata.Source

@@ -19,8 +19,7 @@
                 <td style="width: 12%;"><p><b>Адресс</b></p></td>
                 <td style="width: 8%;"><p><b>Площадь, м²</b></p></td>
                 <td style="width: 10%;"><p><b>Стоимость, ₽</b></p></td>
-                <td style="width: 10%;"><p></p></td>
-                <td style="width: 6%;"><p></p></td>
+                <td style="width: 13%;"><p><b>Опции</b></p></td>
             </tr>
             @foreach (var m in Model)
             {
@@ -28,19 +27,19 @@
                     <td><p>@Html.DisplayFor(model => m.Id)</p></td>
                     <td><p>@Html.DisplayFor(model => m.HandBookOfCOType.tHCOname)</p></td>
                     <td><p>@Html.DisplayFor(model => m.cadastralNumber)</p></td>
-                    <td><p>@Html.DisplayFor(model => m.dateOfEntry)</p></td>
+                    <td><p>@Html.ValueFor(model => m.dateOfEntry, "{0:dd/MM/yyyy}")</p></td>
                     <td><p>@Html.DisplayFor(model => m.legalStatus)</p></td>
                     <td><p>@Html.DisplayFor(model => m.address)</p></td>
                     <td><p>@Html.DisplayFor(model => m.square)</p></td>
                     <td><p>@Html.DisplayFor(model => m.cost)</p></td>
-                    <td><p><a href="/CO/COEdit/@m.Id">Изменить</a></p></td>
-                    <td><p><a href="/CO/CODelete/@m.Id">Удалить</a></p></td>
+                    <td><p><a href="/CO/COEdit/@m.Id" class="btn btn-primary btn-sm">Изменить</a>&emsp;
+                        <a href="/CO/CODelete/@m.Id" class="btn btn-primary btn-sm">Удалить</a></p></td>
                 </tr>
             }
         </table>
         <br />
-        <p><a href="/CO/COCreate" class="btn btn-primary btn-lg">Создать новый Кадастровый обьект</a></p><br/>       
-        <p><a href="/COType/ShowHandBookOfCOType" class="btn btn-primary btn-lg">Справочник типов кадастровых обьектов</a></p>
+        <a href="/CO/COCreate" class="btn btn-primary btn-lg">Создать новый Кадастровый обьект </a>&emsp;       
+        <a href="/COType/ShowHandBookOfCOType" class="btn btn-primary btn-lg">Справочник типов кадастровых обьектов</a>
     </div>
 </body>
 </html>

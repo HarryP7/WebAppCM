@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,10 +12,10 @@ namespace WebAppCM.Controllers.COTypeController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: COType        
+        [HttpGet]
         public ActionResult ShowHandBookOfCOType()
         {
-            var items = db.HandBookOfCOTypes;
-            return View(items.ToList());
+            return View(db.HandBookOfCOTypes.ToList());
         }
         // GET: COType/Details/5
         public ActionResult typeCODetails(int? id)
@@ -33,69 +34,68 @@ namespace WebAppCM.Controllers.COTypeController
         }
 
         // GET: COType/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
-
         // POST: COType/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(HandBookOfCOType type)
         {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            db.HandBookOfCOTypes.Add(type);
+            db.SaveChanges();
+            return RedirectToAction("ShowHandBookOfCOType");
         }
 
         // GET: COType/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            HandBookOfCOType type = db.HandBookOfCOTypes.Find(id);
+            if (type != null)
+            {
+                return View(type);
+            }
+            return HttpNotFound();
         }
-
         // POST: COType/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(HandBookOfCOType type)
         {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            db.Entry(type).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("ShowHandBookOfCOType");
         }
 
         // GET: COType/Delete/5
+        [HttpGet]
         public ActionResult Delete(int id)
         {
-            return View();
+            HandBookOfCOType type = db.HandBookOfCOTypes.Find(id);
+            if (type == null)
+            {
+                return HttpNotFound();
+            }
+            return View(type);
         }
 
         // POST: COType/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        public ActionResult typeDelete(int id)
         {
-            try
+            HandBookOfCOType type = db.HandBookOfCOTypes.Find(id);
+            if (type == null)
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                return HttpNotFound();
             }
-            catch
-            {
-                return View();
-            }
+            db.HandBookOfCOTypes.Remove(type);
+            db.SaveChanges();
+            return RedirectToAction("ShowHandBookOfCOType");
         }
     }
 }

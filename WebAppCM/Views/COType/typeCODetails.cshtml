@@ -5,24 +5,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>typeCODetails</h2>
+<h2>Детали</h2>
 
 <div>
     <h4>Тип @Model.tHCOname</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dd>
-            <ul>
-                @foreach (var co in Model.CadastralObjects)
-                {
-                    <li>Стоимость: @co.cost (Адресс: @co.address)</li>
-                    <li>Дата: @co.dateOfEntry (Номер: @co.cadastralNumber)</li>
-                }
-            </ul>
-        </dd>
-    </dl>
-</div>
+    <hr />        
+    @foreach (var co in Model.CadastralObjects)
+    {
+        <p> № @co.Id  Стоимость: @co.cost (Адресс: @co.address)
+        Дата: @co.dateOfEntry (Номер: @co.cadastralNumber)</p>
+   
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a href="/COType/COTypeEdit/@Model.Id" class="btn btn-primary btn-lg">>Изменить</a>&emsp;
+    <a href="/COType/ShowHandBookOfCOType" class="btn btn-primary btn-lg">&laquo;Вернуться к Справочнику типов</a>
+   
 </p>
+    }
+</div>

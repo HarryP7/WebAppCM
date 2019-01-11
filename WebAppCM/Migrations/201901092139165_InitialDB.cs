@@ -35,7 +35,6 @@ namespace WebAppCM.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         fk_typeCO = c.Int(),
-                        type = c.String(),
                         cadastralNumber = c.String(),
                         dateOfEntry = c.DateTime(nullable: false),
                         legalStatus = c.String(),
@@ -101,12 +100,12 @@ namespace WebAppCM.Migrations
                         surname = c.String(),
                         name = c.String(),
                         patronimic = c.String(),
+                        PhoneNumber = c.String(),
+                        PhoneNumberConfirmed = c.Boolean(nullable: false),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
                         SecurityStamp = c.String(),
-                        PhoneNumber = c.String(),
-                        PhoneNumberConfirmed = c.Boolean(nullable: false),
                         TwoFactorEnabled = c.Boolean(nullable: false),
                         LockoutEndDateUtc = c.DateTime(),
                         LockoutEnabled = c.Boolean(nullable: false),
@@ -166,9 +165,9 @@ namespace WebAppCM.Migrations
             Sql("insert into dbo.AspNetRoles values ('1', 'Admin')");
             Sql("insert into dbo.AspNetRoles values ('2', 'Engineer')");
             Sql("insert into dbo.AspNetRoles values ('3', 'Castomer')");
-
+                       
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");

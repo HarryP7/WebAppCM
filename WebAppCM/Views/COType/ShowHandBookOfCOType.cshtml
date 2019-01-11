@@ -7,29 +7,27 @@
 <html>
 <body>
     <div>
-        <h3>Справочник типов кадастровых обьектов</h3><hr />
+        <h2>Справочник типов кадастровых обьектов</h2><hr />
         <table class="text-center table-bordered">
             <tr>
                 <td style="width: 50px;"><p><b>№</b></p></td>
                 <td style="width: 200px;"><p><b>Тип</b></p></td>
-                <td style="width: 100px;"><p></p></td>
-                <td style="width: 100px;"><p></p></td>
-                <td style="width: 100px;"><p></p></td>
+                <td style="width: 250px;"><p><b>Oпции</b></p></td>
             </tr>
             @foreach (var m in Model)
             {
                 <tr>
                     <td><p>@Html.DisplayFor(model => m.Id)</p></td>
                     <td><p>@Html.DisplayFor(model => m.tHCOname)</p></td>
-                    <td><p><a href="/COType/typeCODetails/@m.Id">Детали</a></p></td>
-                    <td><p><a href="/COType/COTypeEdit/@m.Id">Изменить</a></p></td>
-                    <td><p><a href="/COType/COTypeDelete/@m.Id">Удалить</a></p></td>
+                    <td><a href="/COType/typeCODetails/@m.Id">Детали</a>&emsp;
+                    <a href="/COType/Edit/@m.Id">Изменить</a>&emsp;
+                    <a href="/COType/Delete/@m.Id">Удалить</a></td>
                 </tr>
             }
         </table>
         <br />
-        <p><a href="/COType/COTypeCreate" class="btn btn-primary btn-lg">Создать новый тип кадастрового обьекта</a></p><br />
-        <p><a href="/CO/ListCO" class="btn btn-primary btn-lg">&laquo; Вернуться к списку Кадастровыx обьектов</a></p>
+        <a href="/COType/Create" class="btn btn-primary btn-lg">Создать новый тип кадастрового обьекта</a>&emsp;
+        <a href="/CO/ListCO" class="btn btn-primary btn-lg">&laquo; Вернуться к списку Кадастровыx обьектов</a>
     </div>
 </body>
 </html>

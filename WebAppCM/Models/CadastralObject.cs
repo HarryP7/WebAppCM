@@ -20,7 +20,6 @@ namespace WebAppCM.Models
         public int Id { get; set; }
         [ForeignKey(nameof(HandBookOfCOType))]
         public int? fk_typeCO { get; set; }
-        public string type { get; set; }
         public string cadastralNumber { get; set; }
         public System.DateTime dateOfEntry { get; set; }
         public string legalStatus { get; set; }

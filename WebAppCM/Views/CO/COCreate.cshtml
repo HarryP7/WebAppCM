@@ -8,7 +8,7 @@
 @using (Html.BeginForm("COCreate", "CO", FormMethod.Post))
 {
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2"><b>
             Тип кадастрового объекта:<br /><br />
             Кадастровый номер:<br /><br />
             Дата внесения:<br /><br />
@@ -16,20 +16,20 @@
             Адрес:<br /><br />
             Площадь:<br /><br />
             Стоимость:<br /><br />
+            </b>
         </div>
         <div class="col-md-2">
-            @Html.DropDownListFor(m => m.fk_tipeCO, ViewBag.HandBookOfCOTypes as SelectList)<br /><br />
+            @Html.DropDownListFor(m => m.fk_typeCO, ViewBag.HandBookOfCOTypes as SelectList)<br /><br />
             @Html.EditorFor(m => m.cadastralNumber)<br /><br />
-            <input type="date" name="dateOfEntry" /><br /><br />
+            @Html.TextBoxFor(m => m.dateOfEntry, new { type = "date" })<br /><br/>
             @Html.EditorFor(m => m.legalStatus)<br /><br />
             @Html.EditorFor(m => m.address)<br /><br />
             @Html.EditorFor(m => m.square)<br /><br />
             @Html.EditorFor(m => m.cost)<br /><br />
         </div>
     </div>
-            <input type="submit" value="Добавить" class="btn btn-primary btn-lg"/>
-            }
-<div>
-    <br />
-    <p><a href="/CO/ListCO" class="btn btn-primary btn-lg">&laquo; Вернуться к списку Кадастровыx обьектов</a></p>
-</div>
+    <div>
+        <input type="submit" value="Добавить" class="btn btn-primary btn-lg" />&emsp;
+        <a href="/CO/ListCO" class="btn btn-primary btn-lg">&laquo; Вернуться к списку Кадастровыx обьектов</a>
+    </div>
+}

@@ -207,6 +207,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CWController\CWController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -217,6 +218,22 @@
     <Compile Include="Migrations\201901101519094_InitialDB.Designer.cs">
       <DependentUpon>201901101519094_InitialDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901111711418_InitialDB1.cs" />
+    <Compile Include="Migrations\201901111711418_InitialDB1.Designer.cs">
+      <DependentUpon>201901111711418_InitialDB1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901111741036_InitialDB2.cs" />
+    <Compile Include="Migrations\201901111741036_InitialDB2.Designer.cs">
+      <DependentUpon>201901111741036_InitialDB2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901120218444_InitialDB3.cs" />
+    <Compile Include="Migrations\201901120218444_InitialDB3.Designer.cs">
+      <DependentUpon>201901120218444_InitialDB3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901120222367_InitialDB4.cs" />
+    <Compile Include="Migrations\201901120222367_InitialDB4.Designer.cs">
+      <DependentUpon>201901120222367_InitialDB4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Application.cs" />
@@ -225,12 +242,17 @@
     <Compile Include="Models\HandBookOfCOType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PayModel.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\TypeCW.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-WebAppCMv2.mdf" />
+    <Content Include="App_Data\aspnet-WebAppCMv2_log.ldf">
+      <DependentUpon>aspnet-WebAppCMv2.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CSS\styles.css" />
@@ -314,9 +336,12 @@
     <Content Include="Views\COType\Edit.cshtml" />
     <Content Include="Views\COType\Create.cshtml" />
     <Content Include="Views\COType\Delete.cshtml" />
+    <Content Include="Views\App\AppEdit.cshtml" />
+    <Content Include="Views\App\AppDelete.cshtml" />
+    <Content Include="Views\App\AppPay.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="Views\CW\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -332,6 +357,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201901101519094_InitialDB.resx">
       <DependentUpon>201901101519094_InitialDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901111711418_InitialDB1.resx">
+      <DependentUpon>201901111711418_InitialDB1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901111741036_InitialDB2.resx">
+      <DependentUpon>201901111741036_InitialDB2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901120218444_InitialDB3.resx">
+      <DependentUpon>201901120218444_InitialDB3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901120222367_InitialDB4.resx">
+      <DependentUpon>201901120222367_InitialDB4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

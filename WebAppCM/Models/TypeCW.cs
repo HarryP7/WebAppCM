@@ -22,7 +22,6 @@ namespace WebAppCM.Models
     
         [InverseProperty(nameof(Application.TypeCW))]        
         public virtual ICollection<Application> Applications { get; set; } = new HashSet<Application>();
-        [InverseProperty(nameof(CadastralWork.TypeCW))]
-        public virtual ICollection<CadastralWork> CadastralWorks { get; set; } = new HashSet<CadastralWork>();
+        public IEnumerable<Application> app;
     }
 }

@@ -16,22 +16,25 @@ namespace WebAppCM.Models
 
     public partial class Application
     {
-        [Key]
+        [Key, Display(Name = "№:")]
         public int Id { get; set; }
-        [ForeignKey(nameof(User))]
+        [ForeignKey(nameof(User)), Display(Name = "Заказчик:")]
         public string fk_User { get; set; }
+        [Display(Name = "Дата:")]
         public System.DateTime date { get; set; }
-        [ForeignKey(nameof(CadastralObject))]
-        public int fk_cadastralObject { get; set; }
-        [ForeignKey(nameof(TypeCW))]
-        public int fk_typeCW { get; set; }
+        [ForeignKey(nameof(HandBookOfCOType)),Display(Name = "Кадастровый обьект:")]
+        public int? fk_typeCO { get; set; }
+        [ForeignKey(nameof(TypeCW)), Display(Name = "Тип КР:")]
+        public int? fk_typeCW { get; set; }
+        [Display(Name = "Описание:")]
         public string description { get; set; }
-        [ForeignKey(nameof(Status))]
+        [ForeignKey(nameof(Status)), Display(Name = "Статус:")]
         public int fk_status { get; set; }
 
-        public virtual CadastralObject CadastralObject { get; set; }
+        public virtual HandBookOfCOType HandBookOfCOType { get; set; }
         public virtual ApplicationUser User { get; set; }
         public virtual Status Status { get; set; }
         public virtual TypeCW TypeCW { get; set; }
+        public virtual PayModel PayModel { get; set; }
     }
 }

@@ -1,0 +1,31 @@
+﻿@model WebAppCM.Models.Application
+
+@{
+    ViewBag.Title = "Отмена заявки";
+}
+
+<h2>Отмена заявки № @Model.Id</h2>
+
+<h3>Вы уверены, что хотите отменить эту заявку?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.fk_typeCO)</dt>
+        <dd>@Html.DisplayFor(model => model.HandBookOfCOType.tHCOname)</dd>
+        <dt>@Html.DisplayNameFor(model => model.fk_typeCW)</dt>
+        <dd>@Html.DisplayFor(model => model.TypeCW.tCWname)</dd>
+        <dt>@Html.DisplayNameFor(model => model.description)</dt>
+        <dd>@Html.DisplayFor(model => model.description)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Status.sName)</dt>
+        <dd>@Html.DisplayFor(model => model.Status.sName)</dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <a href="/App/ListApp" class="btn btn-default btn-lg">&laquo; Вернуться к списку заявок</a>&emsp;
+            <input type="submit" value="Отменить" class="btn btn-danger btn-lg" />
+            </div>
+    }
+</div>

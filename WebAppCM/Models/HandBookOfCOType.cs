@@ -22,6 +22,9 @@ namespace WebAppCM.Models
     
         [InverseProperty(nameof(CadastralObject.HandBookOfCOType))]
         public virtual ICollection<CadastralObject> CadastralObjects { get; set; } = new HashSet<CadastralObject>();
-        public IEnumerable<CadastralObject> co;      
+        [InverseProperty(nameof(Application.HandBookOfCOType))]
+        public virtual ICollection<Application> Applications { get; set; } = new HashSet<Application>();
+        public IEnumerable<CadastralObject> co;
+        public IEnumerable<Application> app;
     }
 }

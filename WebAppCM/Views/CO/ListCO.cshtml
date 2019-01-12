@@ -8,7 +8,7 @@
 <html>
 <body>
     <div>
-        <h3>Список Кадастровыx обьектов</h3>
+        <h3>Список Кадастровыx обьектов</h3><hr />
         <table class="text-center table-bordered">
             <tr>
                 <td style="width: 2%;"><p><b>№</b></p></td>
@@ -33,13 +33,13 @@
                     <td><p>@Html.DisplayFor(model => m.square)</p></td>
                     <td><p>@Html.DisplayFor(model => m.cost)</p></td>
                     <td><p><a href="/CO/COEdit/@m.Id" class="btn btn-primary btn-sm">Изменить</a>&emsp;
-                        <a href="/CO/CODelete/@m.Id" class="btn btn-primary btn-sm">Удалить</a></p></td>
+                        <a href="/CO/CODelete/@m.Id" class="btn btn-danger btn-sm">Удалить</a></p></td>
                 </tr>
             }
         </table>
         <br />
         <a href="/CO/COCreate" class="btn btn-primary btn-lg">Создать новый Кадастровый обьект </a>&emsp;       
-        <a href="/COType/ShowHandBookOfCOType" class="btn btn-primary btn-lg">Справочник типов кадастровых обьектов</a>
+        <a href="/COType/ShowHandBookOfCOType" class="btn btn-default btn-lg">Справочник типов кадастровых обьектов</a>
     </div>
 </body>
 </html>

@@ -1,70 +1,61 @@
 ﻿@model WebAppCM.Models.Application
 @{
-    ViewBag.Title = "AppCreate";
+    ViewBag.Title = "Новая заявка";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>Новая заявка</h2>
-@using (Html.BeginForm("AppCreate", "App", FormMethod.Post))
-{
-    <dl>
-        <input type="hidden" value="@ViewBag.Buses.id" name="busID" />
-        <input type="hidden" value="@ViewBag.User.Email" name="clientEmail" />
-        <dt>Пользователь: @ViewBag.User.surnameName @ViewBag.User.name @ViewBag.User.patronymic</dt>
-        <dt>Автобус: @ViewBag.Buses.marka @ViewBag.Buses.model</dt>
-        <dt>Маршрут: @Html.EditorFor(model => model.path)</dt>
-        <dt>Дата выезда: <input type="date" name="departureDate" /></dt>
-        <dt>Дата возвращения: <input type="date" name="returnDate" /></dt>
-    </dl>
 
-    <input type="submit" value="Отправить" />
-}
     @using (Html.BeginForm("AppCreate", "App", FormMethod.Post))
     {
-        <input type="hidden" value="@ViewBag.Customer.User.surnameName" name="surnameName" />
-        <input type="hidden" value="@ViewBag.date" name="date" />
-        <input type="hidden" value="@ViewBag.CadastralObject.HandBookOfCOType.tHCOname" name="CadastralObject" />
-        <input type="hidden" value="@ViewBag.TypeCW.tCWname" name="TypeCW" />
-        <input type="hidden" value="@ViewBag.description" name="description" />
-        <input type="hidden" value="@ViewBag.Status.sName" name="Status" />
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <input type="hidden" value="@ViewBag.User.Id" name="fk_User" />
+            <input type="hidden" value="@ViewBag.Date" name="date" />
+            <input type="hidden" value="@ViewBag.Status" name="fk_status" />
+            <div class="form-group">
+                @Html.LabelFor(model => model.fk_User, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    <div class="form-control">
+                        @ViewBag.User.surname @ViewBag.User.name @ViewBag.User.patronimic
+                    </div>
+                </div>
+                </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    <div class="form-control">
+                        @ViewBag.Date
+                    </div>
+                </div>
+                </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.fk_typeCO, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.fk_typeCO, ViewBag.HandBookOfCOTypes as SelectList, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.fk_typeCO, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.fk_typeCW, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.fk_typeCW, ViewBag.TypeCW as SelectList, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.fk_typeCW, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(m => m.description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.description, "", new { @class = "text-danger" })
+                </div>
+            </div>          
 
-        <dt>Заказчик: @ViewBag.Customer.User.surnameName</dt>
-        <dt>Дата: @ViewBag.date</dt>
-        <dt>Кадастровый обьект: @ViewBag.CadastralObject.HandBookOfCOType.tHCOname</dt>
-        <dt>Тип кадастровой работы: @ViewBag.TypeCW.tCWname)</dt>
-        <dt>Описание: @ViewBag.description)</dt>
-        <dt>Статус: Ожидание оплаты)</dt>
-
-
-        <input type="submit" value="Отправить" />
+            <div class="form-group">
+                <a href="/App/ListApp" class="btn btn-default btn-lg">&laquo; Вернуться к списку заявок</a>&emsp;
+                <input type="submit" value="Отправить" class="btn btn-primary btn-lg" />
+            </div>
+        </div>
     }
-
-
-        @using (Html.BeginForm())
-        {
-            @Html.LabelFor(m => m.fk_customer, "Заказчик")
-            <br />
-            @Html.EditorFor(m => m.fk_customer)
-            <br /><br />
-            @Html.LabelFor(m => m.date, "Дата")
-            <br />
-            @Html.EditorFor(m => @DateTime.Now.Date)
-            <br /><br />
-            @Html.LabelFor(m => m.fk_cadastralObject, "Кадастровый обьект")
-            <br />
-            @Html.EditorFor(m => m.fk_cadastralObject)
-            <br /><br />
-            @Html.LabelFor(m => m.fk_typeCW, "Тип кадастровой работы")
-            <br />
-            @Html.EditorFor(m => m.fk_typeCW)
-            <br /><br />
-            @Html.LabelFor(m => m.description, "Описание")
-            <br />
-            @Html.EditorFor(m => m.description)
-            @*<br /><br />
-            @Html.LabelFor(m => m.fk_status, "Статус")
-            <br />
-            @Html.EditorFor(m => m.fk_status)*@
-            <br /><br />
-            <input type="submit" value="Добавить" />
-        }
-    
+            

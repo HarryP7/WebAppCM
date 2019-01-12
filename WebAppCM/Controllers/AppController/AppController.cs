@@ -1,113 +1,144 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebAppCM.Models;
+using System.Data.Entity;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace WebAppCM.Controllers.AppController
 {
     public class AppController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        //private DAOApp dao = new DAOApp();
         // GET: App
         [HttpGet, Authorize(Roles = "Admin, Engineer,Castomer")]
         public ActionResult ListApp()
         {
-            var items = db.Applications.Include(p => p.CadastralObject.HandBookOfCOType).Include(p => p.User).Include(p => p.Status).Include(p => p.TypeCW);
+            var items = db.Applications.Include(p => p.HandBookOfCOType).Include(p => p.User).Include(p => p.Status).Include(p => p.TypeCW); 
             return View(items);
         }
-
-        // GET: App/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-        private ApplicationUserManager UserManager{
-            get{
-                return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+        // GET: App
+   //     [HttpGet, Authorize(Roles = "Castomer")]
+   //     public ActionResult ListUserApp()
+   //     {
+   //         ApplicationUser user = UserManager.FindByEmail(User.Identity.Name);
+   //         var items = db.Applications.Where(p => p.User.Id == user).Include(p => //p.CadastralObject.HandBookOfCOType).Include(p => p.User).Include(p => p.Status).Include(p => /p.TypeCW);
+   //         return View(items);
+   //     }
+   
+        private ApplicationUserManager UserManager
+        {   get
+            {return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
         }
-        // GET: App/Create
+        // GET: App/Create 
         [HttpGet, Authorize(Roles = "Admin, Engineer,Castomer")]
-        public ActionResult AppCreate(int id)
+        public ActionResult AppCreate()
         {
             ApplicationUser user = UserManager.FindByEmail(User.Identity.Name);
-            if (user != null)
-            {
-                ViewBag.User = user;
-                // Формируем список типов КО для передачи в представление
-                SelectList typeCO = new SelectList(db.HandBookOfCOTypes, "Id", "tHCOname");
-                ViewBag.HandBookOfCOTypes = typeCO;
-                // Формируем список типов КО для передачи в представление
-                SelectList typeCW = new SelectList(db.TypeCWs, "Id", "tCWname");
-                ViewBag.TypeCW = typeCW;
-                ViewBag.Satus = 2;
-                return View();
-            };
-            return RedirectToAction("Login", "Account");
+            ViewBag.User = user;
+            ViewBag.Date = DateTime.Now;
+            // Формируем список типов КО для передачи в представление
+            SelectList typeCO = new SelectList(db.HandBookOfCOTypes, "Id", "tHCOname");
+            ViewBag.HandBookOfCOTypes = typeCO;
+            // Формируем список типов КР для передачи в представление
+            SelectList typeCW = new SelectList(db.TypeCWs, "Id", "tCWname");
+            ViewBag.TypeCW = typeCW;
+            ViewBag.Status = 2; 
+            return View();
         }
         // POST: App/Create
         [HttpPost]
-        public ActionResult AppCreate(Application m)
+        public ActionResult AppCreate(Application App)
         {
-            //Application app = new Application()
-            //{
-
-            //}
-            //db.Applications.Add(App);
+            db.Applications.Add(App);
             db.SaveChanges();
-            return RedirectToAction("AppList");
+            return RedirectToAction("AppPay");
         }
 
         // GET: App/Edit/5
         [HttpGet, Authorize(Roles = "Admin, Engineer,Castomer")]
-        public ActionResult Edit(int id)
+        public ActionResult AppEdit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            // Находим в бд выбранную заявку
+            Application app = db.Applications.Find(id);
+            if (app != null)
+            {
+                // Создаем список типо КО для передачи в представление
+                SelectList typeCO = new SelectList(db.HandBookOfCOTypes, "Id", "tHCOname", app.fk_typeCO);
+                ViewBag.HandBookOfCOTypes = typeCO;
+                // Создаем список типо КР для передачи в представление
+                SelectList typeCW = new SelectList(db.TypeCWs, "Id", "tCWname", app.fk_typeCW);
+                ViewBag.TypeCW = typeCW;
+                return View(app);
+            }
+            return RedirectToAction("ListApp");
         }
 
         // POST: App/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult AppEdit(Application app)
         {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            db.Entry(app).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("ListApp");
         }
 
         // GET: App/Delete/5
         [HttpGet, Authorize(Roles = "Admin, Engineer,Castomer")]
-        public ActionResult Delete(int id)
+        public ActionResult AppDelete(int id)
         {
-            return View();
+            Application app = db.Applications.Find(id);
+            if (app == null)
+            {
+                return HttpNotFound();
+            }
+            return View(app);
         }
 
         // POST: App/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("AppDelete")]
+        public ActionResult AppDeleteConfirmed(int id)
         {
-            try
+            Application app = db.Applications.Find(id);
+            if (app == null)
             {
-                // TODO: Add delete logic here
+                return HttpNotFound();
+            }
+            db.Applications.Remove(app);
+            db.SaveChanges();
+            return RedirectToAction("ListApp");
+        }
 
-                return RedirectToAction("Index");
+        // GET: App/AppPay/5
+        [HttpGet, Authorize(Roles = "Admin, Engineer,Castomer")]
+        public ActionResult AppPay(int? id)
+        {
+            if (id == null)
+            {   return HttpNotFound();
             }
-            catch
-            {
-                return View();
+            // Находим в бд выбранную заявку
+            Application app = db.Applications.Find(id);
+            if (app != null)
+            {   return View(app);
             }
+            return RedirectToAction("ListApp");
+        }
+
+        // POST: App/Edit/5
+        [HttpPost]
+        public ActionResult AppPay(Application app)
+        {
+            db.Entry(app).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("ListApp");
         }
     }
 }

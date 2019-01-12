@@ -14,14 +14,14 @@
 </head>
 <body>
     <div>
-        <h3>Список заявок</h3>
+        <h3>Список заявок</h3><hr/>
         <table class="text-center table-bordered">
             <tr>
                 <td style="width: 2%;"><p><b>№</b></p></td>
                 <td style="width: 10%;"><p><b>Пользователь</b></p></td>
                 <td style="width: 12%;"><p><b>Дата</b></p></td>
-                <td style="width: 10%;"><p><b>Тип КО</b></p></td>
-                <td style="width: 12%;"><p><b>Тип КР</b></p></td>
+                <td style="width: 10%;"><p><b>Кадастровый обьект</b></p></td>
+                <td style="width: 12%;"><p><b>Тип кадастровой работы</b></p></td>
                 <td style="width: 10%;"><p><b>Описание</b></p></td>
                 <td style="width: 12%;"><p><b>Статус</b></p></td>
                 <td style="width: 13%;"><p><b>Опции</b></p></td>
@@ -32,12 +32,16 @@
                     <td><p>@Html.DisplayFor(model => m.Id)</p></td>
                     <td><p>@m.User.surname @m.User.name @m.User.patronimic</p></td>
                     <td><p>@Html.DisplayFor(model => m.date)</p></td>
-                    <td><p>@Html.DisplayFor(model => m.CadastralObject.HandBookOfCOType.tHCOname)</p></td>
+                    <td><p>@Html.DisplayFor(model => m.HandBookOfCOType.tHCOname)</p></td>
                     <td><p>@Html.DisplayFor(model => m.TypeCW.tCWname)</p></td>
                     <td><p>@Html.DisplayFor(model => m.description)</p></td>
                     <td><p>@Html.DisplayFor(model => m.Status.sName)</p></td>
                     <td><p><a href="/App/AppEdit/@m.Id" class="btn btn-primary btn-sm">Изменить</a>
-                        <a href="/App/AppDelete/@m.Id" class="btn btn-primary btn-sm">Удалить</a></p></td>
+                    <a href="/App/AppDelete/@m.Id" class="btn btn-danger btn-sm">Отменить</a></p>
+                    @if (m.fk_status == 2)
+                    {<a href="/App/AppPay/@m.Id" class="btn btn-success btn-sm">Оплатить</a>
+                    }
+                    </td> 
                 </tr>
             }
         </table>

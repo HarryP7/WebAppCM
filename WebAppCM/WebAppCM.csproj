@@ -234,6 +234,18 @@
     <Compile Include="Migrations\201901120222367_InitialDB4.Designer.cs">
       <DependentUpon>201901120222367_InitialDB4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901121756162_InitialDB5.cs" />
+    <Compile Include="Migrations\201901121756162_InitialDB5.Designer.cs">
+      <DependentUpon>201901121756162_InitialDB5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901130108565_InitialDB6.cs" />
+    <Compile Include="Migrations\201901130108565_InitialDB6.Designer.cs">
+      <DependentUpon>201901130108565_InitialDB6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901130746362_InitialDB7.cs" />
+    <Compile Include="Migrations\201901130746362_InitialDB7.Designer.cs">
+      <DependentUpon>201901130746362_InitialDB7.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Application.cs" />
@@ -241,6 +253,7 @@
     <Compile Include="Models\CadastralWork.cs" />
     <Compile Include="Models\HandBookOfCOType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LegalStatus.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PayModel.cs" />
     <Compile Include="Models\Status.cs" />
@@ -249,10 +262,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\aspnet-WebAppCMv2.mdf" />
-    <Content Include="App_Data\aspnet-WebAppCMv2_log.ldf">
-      <DependentUpon>aspnet-WebAppCMv2.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CSS\styles.css" />
@@ -339,9 +348,14 @@
     <Content Include="Views\App\AppEdit.cshtml" />
     <Content Include="Views\App\AppDelete.cshtml" />
     <Content Include="Views\App\AppPay.cshtml" />
+    <Content Include="Views\CW\ListCW.cshtml" />
+    <Content Include="Views\CW\CWCreate.cshtml" />
+    <Content Include="Views\App\AppCancel.cshtml" />
+    <Content Include="Views\CW\CWEdit.cshtml" />
+    <Content Include="Views\CW\CWComplete.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\CW\" />
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -369,6 +383,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901120222367_InitialDB4.resx">
       <DependentUpon>201901120222367_InitialDB4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901121756162_InitialDB5.resx">
+      <DependentUpon>201901121756162_InitialDB5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901130108565_InitialDB6.resx">
+      <DependentUpon>201901130108565_InitialDB6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901130746362_InitialDB7.resx">
+      <DependentUpon>201901130746362_InitialDB7.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

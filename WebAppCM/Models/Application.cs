@@ -22,7 +22,7 @@ namespace WebAppCM.Models
         public string fk_User { get; set; }
         [Display(Name = "Дата:")]
         public System.DateTime date { get; set; }
-        [ForeignKey(nameof(HandBookOfCOType)),Display(Name = "Кадастровый обьект:")]
+        [ForeignKey(nameof(HandBookOfCOType)),Display(Name = "Кадастровый объект:")]
         public int? fk_typeCO { get; set; }
         [ForeignKey(nameof(TypeCW)), Display(Name = "Тип КР:")]
         public int? fk_typeCW { get; set; }
@@ -30,7 +30,11 @@ namespace WebAppCM.Models
         public string description { get; set; }
         [ForeignKey(nameof(Status)), Display(Name = "Статус:")]
         public int fk_status { get; set; }
+        [Display(Name = "Стоимость:")]
+        public decimal cost { get; set; }
 
+        [InverseProperty(nameof(CadastralWork.app))]
+        public virtual ICollection<CadastralWork> CadastralWorks { get; set; } = new HashSet<CadastralWork>();
         public virtual HandBookOfCOType HandBookOfCOType { get; set; }
         public virtual ApplicationUser User { get; set; }
         public virtual Status Status { get; set; }

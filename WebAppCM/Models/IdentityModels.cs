@@ -15,6 +15,7 @@ namespace WebAppCM.Models
         public string name { get; set; }
         public string patronimic { get; set; }
         public IEnumerable<Application> app;
+        public IEnumerable<CadastralWork> cw;
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Обратите внимание, что authenticationType должен совпадать с типом, определенным в CookieAuthenticationOptions.AuthenticationType
@@ -37,6 +38,8 @@ namespace WebAppCM.Models
         public virtual DbSet<CadastralWork> CadastralWorks { get; set; }
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<TypeCW> TypeCWs { get; set; }
+        public virtual DbSet<LegalStatus> LegalStatus { get; set; }
+        
 
         public static ApplicationDbContext Create()
         {

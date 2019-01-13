@@ -16,6 +16,11 @@
         <input type="hidden" value="@Model.fk_User" name="fk_User" />
         <input type="hidden" value="@Model.date" name="date" />
         <input type="hidden" value="@Model.fk_status" name="fk_status" />
+        <input type="hidden" value="@Model.PayModel.cartNumber" name="PayModel.cartNumber" />
+        <input type="hidden" value="@Model.PayModel.Validity" name="PayModel.Validity" />
+        <input type="hidden" value="@Model.PayModel.cartName" name="PayModel.cartName" />
+        <input type="hidden" value="@Model.PayModel.cartCod" name="PayModel.cartCod" />
+        <input type="hidden" value="@Model.cost" name="cost" />
         <div class="form-group">
             @Html.LabelFor(model => model.fk_User, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-3">

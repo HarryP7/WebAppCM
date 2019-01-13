@@ -17,25 +17,18 @@ namespace WebAppCM.Controllers.AppController
         [HttpGet, Authorize(Roles = "Admin, Engineer,Castomer")]
         public ActionResult ListApp()
         {
-            var items = db.Applications.Include(p => p.HandBookOfCOType).Include(p => p.User).Include(p => p.Status).Include(p => p.TypeCW); 
+            var items = db.Applications.Include(p => p.HandBookOfCOType).Include(p => p.User).Include(p => p.Status).Include(p => p.TypeCW);
+            ApplicationUser user = UserManager.FindByEmail(User.Identity.Name);
+            ViewBag.User = user;
             return View(items);
         }
-        // GET: App
-   //     [HttpGet, Authorize(Roles = "Castomer")]
-   //     public ActionResult ListUserApp()
-   //     {
-   //         ApplicationUser user = UserManager.FindByEmail(User.Identity.Name);
-   //         var items = db.Applications.Where(p => p.User.Id == user).Include(p => //p.CadastralObject.HandBookOfCOType).Include(p => p.User).Include(p => p.Status).Include(p => /p.TypeCW);
-   //         return View(items);
-   //     }
-   
         private ApplicationUserManager UserManager
-        {   get
-            {return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+        { get
+            { return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
         }
         // GET: App/Create 
-        [HttpGet, Authorize(Roles = "Admin, Engineer,Castomer")]
+        [HttpGet]
         public ActionResult AppCreate()
         {
             ApplicationUser user = UserManager.FindByEmail(User.Identity.Name);
@@ -56,11 +49,14 @@ namespace WebAppCM.Controllers.AppController
         {
             db.Applications.Add(App);
             db.SaveChanges();
-            return RedirectToAction("AppPay");
+          // Application app = db.Applications.Find(App.Id);
+          // ViewBag.AppId = app;
+          // ViewBag.App = App;
+            return RedirectToAction("ListApp");
         }
 
         // GET: App/Edit/5
-        [HttpGet, Authorize(Roles = "Admin, Engineer,Castomer")]
+        [HttpGet]
         public ActionResult AppEdit(int? id)
         {
             if (id == null)
@@ -90,16 +86,40 @@ namespace WebAppCM.Controllers.AppController
             db.SaveChanges();
             return RedirectToAction("ListApp");
         }
-
-        // GET: App/Delete/5
-        [HttpGet, Authorize(Roles = "Admin, Engineer,Castomer")]
-        public ActionResult AppDelete(int id)
+        // GET: App/Cancel/5
+        [HttpGet]
+        public ActionResult AppCancel(int id)
         {
             Application app = db.Applications.Find(id);
             if (app == null)
             {
                 return HttpNotFound();
             }
+            return View(app);
+        }
+
+        // POST: App/Cancel/5
+        [HttpPost, ActionName("AppCancel")]
+        public ActionResult AppCancelConfirmed(int id)
+        {
+            Application app = db.Applications.Find(id);
+            if (app == null)
+            {
+                return HttpNotFound();
+            }
+            app.fk_status=5;
+            db.Entry(app).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("ListApp");
+        }
+        // GET: App/Delete/5
+        [HttpGet]
+        public ActionResult AppDelete(int id)
+        {
+            Application app = db.Applications.Find(id);
+            if (app == null)
+                return HttpNotFound();
+
             return View(app);
         }
 
@@ -118,7 +138,7 @@ namespace WebAppCM.Controllers.AppController
         }
 
         // GET: App/AppPay/5
-        [HttpGet, Authorize(Roles = "Admin, Engineer,Castomer")]
+        [HttpGet]
         public ActionResult AppPay(int? id)
         {
             if (id == null)

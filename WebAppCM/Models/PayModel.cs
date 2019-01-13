@@ -9,7 +9,7 @@ namespace WebAppCM.Models
     {
         [Display(Name = "Номер карты:")]
         public string cartNumber { get; set; }
-        [Display(Name = "Срок действия:"), DisplayFormat(DataFormatString = "{0:MM/yy}",
+        [Display(Name = "Срок действия:"), DisplayFormat(DataFormatString = "{0:dd.MM.yy}",
                ApplyFormatInEditMode = true)]
         public System.DateTime Validity { get; set; }
         [Display(Name = "Имя карты:")]

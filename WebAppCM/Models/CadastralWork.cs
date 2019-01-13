@@ -16,17 +16,18 @@ namespace WebAppCM.Models
 
     public partial class CadastralWork
     {
-        [Key]
+        [Key, Display(Name = "№:")]
         public int Id { get; set; }
-        [ForeignKey(nameof(TypeCW))]
-        public int fk_typeCW { get; set; }
-        [ForeignKey(nameof(User))]
+        [ForeignKey(nameof(User)), Display(Name = "Инженер:")]
         public string fk_User { get; set; }
+        [Display(Name = "Учет:")]
         public string accounting { get; set; }
+        [Display(Name = "Описание:")]
         public string description { get; set; }
-        public decimal cost { get; set; }
+        [ForeignKey(nameof(app)), Display(Name = "Заявка:")]
+        public int fk_app { get; set; }
 
+        public virtual Application app { get; set; }
         public virtual ApplicationUser User { get; set; }
-        public virtual TypeCW TypeCW { get; set; }
     }
 }

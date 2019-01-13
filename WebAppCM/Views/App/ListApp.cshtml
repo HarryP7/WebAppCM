@@ -3,50 +3,57 @@
     ViewBag.Title = "Список заявок";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Список заявок</title>
-    <script src="JS/jquery-1.11.0.min.js"></script>
-    <script src="/Content/JS/scrypts.js"></script>
-</head>
-<body>
-    <div>
-        <h3>Список заявок</h3><hr/>
-        <table class="text-center table-bordered">
-            <tr>
-                <td style="width: 2%;"><p><b>№</b></p></td>
-                <td style="width: 10%;"><p><b>Пользователь</b></p></td>
-                <td style="width: 12%;"><p><b>Дата</b></p></td>
-                <td style="width: 10%;"><p><b>Кадастровый обьект</b></p></td>
-                <td style="width: 12%;"><p><b>Тип кадастровой работы</b></p></td>
-                <td style="width: 10%;"><p><b>Описание</b></p></td>
-                <td style="width: 12%;"><p><b>Статус</b></p></td>
-                <td style="width: 13%;"><p><b>Опции</b></p></td>
-            </tr>
-            @foreach (var m in Model)
-            {
-                <tr>
-                    <td><p>@Html.DisplayFor(model => m.Id)</p></td>
-                    <td><p>@m.User.surname @m.User.name @m.User.patronimic</p></td>
-                    <td><p>@Html.DisplayFor(model => m.date)</p></td>
-                    <td><p>@Html.DisplayFor(model => m.HandBookOfCOType.tHCOname)</p></td>
-                    <td><p>@Html.DisplayFor(model => m.TypeCW.tCWname)</p></td>
-                    <td><p>@Html.DisplayFor(model => m.description)</p></td>
-                    <td><p>@Html.DisplayFor(model => m.Status.sName)</p></td>
-                    <td><p><a href="/App/AppEdit/@m.Id" class="btn btn-primary btn-sm">Изменить</a>
-                    <a href="/App/AppDelete/@m.Id" class="btn btn-danger btn-sm">Отменить</a></p>
+<div>
+    <h3>Заявки </h3><hr />
+    @if (ViewContext.HttpContext.User.IsInRole("Castomer"))
+    {<a href="/App/AppCreate" class="btn btn-primary btn-lg">Создать  новую заявку</a><br/><br/>}    
+    <table class="text-center table-bordered">
+        <tr>
+            <td style="width: 2%;"><p><b>№</b></p></td>
+            <td style="width: 10%;"><p><b>Заказчик</b></p></td>
+            <td style="width: 6%;"><p><b>Дата</b></p></td>
+            <td style="width: 10%;"><p><b>Кадастровый объект</b></p></td>
+            <td style="width: 10%;"><p><b>Тип кадастровой работы</b></p></td>
+            <td style="width: 6%;"><p><b>Описание</b></p></td>
+            <td style="width: 8%;"><p><b>Статус</b></p></td>
+            <td style="width: 10%;"><p><b>Оплачено</b></p></td> 
+            <td style="width: 13%;"><p><b>Опции</b></p></td>
+        </tr> 
+        @foreach (var m in Model.Reverse())
+        {<tr>
+            @if (!ViewContext.HttpContext.User.IsInRole("Castomer"))
+            {   <td><p>@Html.DisplayFor(model => m.Id)</p></td>
+                <td><p>@m.User.surname @m.User.name @m.User.patronimic</p></td>
+                <td><p>@Html.DisplayFor(model => m.date)</p></td>
+                <td><p>@Html.DisplayFor(model => m.HandBookOfCOType.tHCOname)</p></td>
+                <td><p>@Html.DisplayFor(model => m.TypeCW.tCWname)</p></td>
+                <td><p>@Html.DisplayFor(model => m.description)</p></td>
+                <td><p>@Html.DisplayFor(model => m.Status.sName)</p></td>
+                <td><p>@Html.DisplayFor(model => m.cost)</p></td>}
+            @if (ViewBag.User.Id == m.User.Id && ViewContext.HttpContext.User.IsInRole("Castomer"))
+            {   <td><p>@Html.DisplayFor(model => m.Id)</p></td>
+                <td><p>@m.User.surname @m.User.name @m.User.patronimic</p></td>
+                <td><p>@Html.DisplayFor(model => m.date)</p></td>
+                <td><p>@Html.DisplayFor(model => m.HandBookOfCOType.tHCOname)</p></td>
+                <td><p>@Html.DisplayFor(model => m.TypeCW.tCWname)</p></td>
+                <td><p>@Html.DisplayFor(model => m.description)</p></td>
+                <td><p>@Html.DisplayFor(model => m.Status.sName)</p></td>
+                <td><p>@Html.DisplayFor(model => m.cost)</p></td>}
+            @if (ViewBag.User.Id == m.User.Id && ViewContext.HttpContext.User.IsInRole("Castomer"))
+            {<td><p><a href="/App/AppEdit/@m.Id" class="btn btn-primary btn-sm">Изменить</a>
+                    <a href="/App/AppCancel/@m.Id" class="btn btn-warning btn-sm">Отменить</a></p>
+                    <a href="/App/AppDelete/@m.Id" class="btn btn-danger btn-sm">Удалить</a>
                     @if (m.fk_status == 2)
-                    {<a href="/App/AppPay/@m.Id" class="btn btn-success btn-sm">Оплатить</a>
-                    }
-                    </td> 
-                </tr>
+                    {<a href="/App/AppPay/@m.Id" class="btn btn-success btn-sm">Оплатить</a>}
+            </td>
             }
-        </table>
-        <br />
-            <a href="/App/AppCreate" class="btn btn-primary btn-lg">Создать  новую заявку</a>
-      </div>
-</body>
-</html>
+            @if (!ViewContext.HttpContext.User.IsInRole("Castomer"))
+            {<td>@if (m.fk_status == 3) 
+                {<a href="/CW/CWCreate/@m.Id" class="btn btn-success btn-sm">Принять</a>
+                <a href="/App/AppCancel/@m.Id" class="btn btn-danger btn-sm">Отклонить</a>}
+            </td> 
+            }
+        </tr>
+        }
+    </table>
+</div>

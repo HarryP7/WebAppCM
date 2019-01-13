@@ -24,8 +24,8 @@ namespace WebAppCM.Models
         public string cadastralNumber { get; set; }
         [Display(Name = "Дата внесения:")]
         public System.DateTime dateOfEntry { get; set; }
-        [Display(Name = "Правовой статус:")]
-        public string legalStatus { get; set; }
+        [ForeignKey(nameof(LegalStatus)), Display(Name = "Правовой статус:")]
+        public int? fk_legalStatus { get; set; }
         [Display(Name = "Адрес:")]
         public string address { get; set; }
         [Display(Name = "Кадастровый номер:")]
@@ -37,5 +37,6 @@ namespace WebAppCM.Models
         public decimal cost { get; set; }        
         
         public virtual HandBookOfCOType HandBookOfCOType { get; set; }
+        public virtual LegalStatus LegalStatus { get; set; }
     }
 }

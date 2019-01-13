@@ -17,15 +17,22 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Главная", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @if (!ViewContext.HttpContext.User.IsInRole("Engineer"))
+                {@Html.ActionLink("Главная", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })}
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Заявки", "ListApp", "App")</li>
+                    @if (ViewContext.HttpContext.User.IsInRole("Engineer") || ViewContext.HttpContext.User.IsInRole("Admin"))
+                    {<li>@Html.ActionLink("Кадастровые работы", "ListCW", "CW")</li>}
                     <li>@Html.ActionLink("Кадастровые объекты", "ListCO", "CO")</li>
-                    <li>@Html.ActionLink("О сайте", "About", "Home")</li>
-                    <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
+                    @if (!ViewContext.HttpContext.User.IsInRole("Engineer"))
+                    {<li>@Html.ActionLink("О сайте", "About", "Home")</li>
+                    <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>}
+                    @*@if (ViewContext.HttpContext.User.IsInRole("Admin"))
+                    {<li>@Html.ActionLink("Пользователи", "ListUsers", "Manage")</li>}*@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

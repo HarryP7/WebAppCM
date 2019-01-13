@@ -17,7 +17,7 @@
         <dt>Дата внесения:</dt>
         <dd>@Html.ValueFor(model => model.dateOfEntry, "{0:dd/MM/yyyy}") </dd>
         <dt>Правовой статус:</dt>
-        <dd>@Html.DisplayFor(model => model.legalStatus) </dd>
+        <dd>@Html.DisplayFor(model => model.LegalStatus.lsName) </dd>
         <dt>Адрес:</dt>
         <dd>@Html.DisplayFor(model => model.address)</dd>
         <dt>Площадь:</dt>

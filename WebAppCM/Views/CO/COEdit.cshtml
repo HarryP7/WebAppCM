@@ -1,10 +1,10 @@
 ﻿@model WebAppCM.Models.CadastralObject
 @{
-    ViewBag.Title = "Изменение Кадастрового обьекта";
+    ViewBag.Title = "Изменение Кадастрового объекта";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Изменение Кадастрового обьекта</h2><hr />
+<h2>Изменение Кадастрового объекта</h2><hr />
 @using (Html.BeginForm("COEdit", "CO", FormMethod.Post))
 {
    @Html.AntiForgeryToken()
@@ -18,7 +18,6 @@
                 @Html.ValidationMessageFor(model => model.fk_typeCO, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.cadastralNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -26,7 +25,6 @@
                 @Html.ValidationMessageFor(model => model.cadastralNumber, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.dateOfEntry, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -34,7 +32,6 @@
                 @Html.ValidationMessageFor(model => model.dateOfEntry, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.fk_legalStatus, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -42,7 +39,6 @@
                 @Html.ValidationMessageFor(model => model.fk_legalStatus, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.address, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -50,7 +46,6 @@
                 @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.square, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -58,7 +53,6 @@
                 @Html.ValidationMessageFor(model => model.square, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.cost, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

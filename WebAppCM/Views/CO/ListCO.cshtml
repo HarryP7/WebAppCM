@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<WebAppCM.Models.CadastralObject>
 @{
-    ViewBag.Title = "Кадастровые обьекты";
+    ViewBag.Title = "Кадастровые объекты";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div>
-    <h3>Кадастровые обьекты</h3><hr />
-    @if (!ViewContext.HttpContext.User.IsInRole("Castomer"))
-    {<a href="/CO/COCreate" class="btn btn-primary btn-lg">Создать новый Кадастровый обьект </a> }&emsp;
-    <a href="/COType/ShowHandBookOfCOType" class="btn btn-default btn-lg">Справочник типов кадастровых обьектов</a>
+    <h3>Кадастровые объекты</h3><hr />
+    @if (!ViewContext.HttpContext.User.IsInRole("Customer"))
+    {<a href="/CO/COCreate" class="btn btn-primary btn-lg">Создать новый Кадастровый объект </a> }&emsp;
+    <a href="/COType/ShowHandBookOfCOType" class="btn btn-default btn-lg">Справочник типов кадастровых объектов</a>
     <br /><br />
     <table class="text-center table-bordered">
         <tr>
@@ -19,7 +19,7 @@
             <td style="width: 12%;"><p><b>Адресс</b></p></td>
             <td style="width: 8%;"><p><b>Площадь, м²</b></p></td>
             <td style="width: 10%;"><p><b>Стоимость, ₽</b></p></td>
-            @if (!ViewContext.HttpContext.User.IsInRole("Castomer"))
+            @if (!ViewContext.HttpContext.User.IsInRole("Customer"))
             {<td style="width: 13%;"><p><b>Опции</b></p></td>}
         </tr>
         @foreach (var m in Model.Reverse())
@@ -33,7 +33,7 @@
                 <td><p>@Html.DisplayFor(model => m.address)</p></td>
                 <td><p>@Html.DisplayFor(model => m.square)</p></td>
                 <td><p>@Html.DisplayFor(model => m.cost)</p></td>
-                @if (!ViewContext.HttpContext.User.IsInRole("Castomer"))
+                @if (!ViewContext.HttpContext.User.IsInRole("Customer"))
                 {<td><p><a href="/CO/COEdit/@m.Id" class="btn btn-primary btn-sm">Изменить</a>&emsp;
                     <a href="/CO/CODelete/@m.Id" class="btn btn-danger btn-sm">Удалить</a></p></td>}
             </tr>

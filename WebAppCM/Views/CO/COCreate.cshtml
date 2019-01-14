@@ -1,10 +1,10 @@
 ﻿@model WebAppCM.Models.CadastralObject
 @{
-    ViewBag.Title = "Новый Кадастровый обьект";
+    ViewBag.Title = "Новый Кадастровый объект";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Новый Кадастровый обьект</h2><hr />
+<h2>Новый Кадастровый объект</h2><hr />
 @using (Html.BeginForm("COCreate", "CO", FormMethod.Post))
 {
 @Html.AntiForgeryToken()

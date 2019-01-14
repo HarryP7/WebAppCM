@@ -12,18 +12,12 @@ namespace WebAppCM.Controllers.COController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: CO
-        [HttpGet, Authorize(Roles = "Admin, Engineer,Castomer")]
+        [HttpGet, Authorize(Roles = "Admin, Engineer,Customer")]
         public ActionResult ListCO()
         {
             var items = db.CadastralObjects.Include(p => p.HandBookOfCOType).Include(p => p.LegalStatus);
             return View(items.ToList());
-        }
-        // GET: CO/Details/5
-        public ActionResult Details(int? id)
-        {
-            return View();
-        }
-
+        } 
         // GET: CO/Create      
         [HttpGet]
         public ActionResult COCreate()
@@ -51,9 +45,7 @@ namespace WebAppCM.Controllers.COController
         public ActionResult COEdit(int? id)
         {
             if (id == null)
-            {
                 return HttpNotFound();
-            }
             // Находим в бд выбранный KO
             CadastralObject co = db.CadastralObjects.Find(id);
             if (co != null)

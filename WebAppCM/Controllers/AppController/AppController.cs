@@ -14,7 +14,7 @@ namespace WebAppCM.Controllers.AppController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: App
-        [HttpGet, Authorize(Roles = "Admin, Engineer,Castomer")]
+        [HttpGet, Authorize(Roles = "Admin, Engineer,Customer")]
         public ActionResult ListApp()
         {
             var items = db.Applications.Include(p => p.HandBookOfCOType).Include(p => p.User).Include(p => p.Status).Include(p => p.TypeCW);
@@ -28,7 +28,7 @@ namespace WebAppCM.Controllers.AppController
             }
         }
         // GET: App/Create 
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Customer, Admin")]
         public ActionResult AppCreate()
         {
             ApplicationUser user = UserManager.FindByEmail(User.Identity.Name);
@@ -49,9 +49,6 @@ namespace WebAppCM.Controllers.AppController
         {
             db.Applications.Add(App);
             db.SaveChanges();
-          // Application app = db.Applications.Find(App.Id);
-          // ViewBag.AppId = app;
-          // ViewBag.App = App;
             return RedirectToAction("ListApp");
         }
 
@@ -60,9 +57,7 @@ namespace WebAppCM.Controllers.AppController
         public ActionResult AppEdit(int? id)
         {
             if (id == null)
-            {
                 return HttpNotFound();
-            }
             // Находим в бд выбранную заявку
             Application app = db.Applications.Find(id);
             if (app != null)
@@ -92,9 +87,7 @@ namespace WebAppCM.Controllers.AppController
         {
             Application app = db.Applications.Find(id);
             if (app == null)
-            {
                 return HttpNotFound();
-            }
             return View(app);
         }
 
@@ -103,10 +96,8 @@ namespace WebAppCM.Controllers.AppController
         public ActionResult AppCancelConfirmed(int id)
         {
             Application app = db.Applications.Find(id);
-            if (app == null)
-            {
+            if (app == null)            
                 return HttpNotFound();
-            }
             app.fk_status=5;
             db.Entry(app).State = EntityState.Modified;
             db.SaveChanges();
@@ -119,7 +110,6 @@ namespace WebAppCM.Controllers.AppController
             Application app = db.Applications.Find(id);
             if (app == null)
                 return HttpNotFound();
-
             return View(app);
         }
 
@@ -129,9 +119,7 @@ namespace WebAppCM.Controllers.AppController
         {
             Application app = db.Applications.Find(id);
             if (app == null)
-            {
-                return HttpNotFound();
-            }
+                return HttpNotFound();            
             db.Applications.Remove(app);
             db.SaveChanges();
             return RedirectToAction("ListApp");
@@ -142,8 +130,7 @@ namespace WebAppCM.Controllers.AppController
         public ActionResult AppPay(int? id)
         {
             if (id == null)
-            {   return HttpNotFound();
-            }
+               return HttpNotFound();
             // Находим в бд выбранную заявку
             Application app = db.Applications.Find(id);
             if (app != null)
@@ -152,7 +139,7 @@ namespace WebAppCM.Controllers.AppController
             return RedirectToAction("ListApp");
         }
 
-        // POST: App/Edit/5
+        // POST: App/AppPay/5
         [HttpPost]
         public ActionResult AppPay(Application app)
         {

@@ -5,7 +5,7 @@
 }
 <div>
     <h3>Заявки </h3><hr />
-    @if (ViewContext.HttpContext.User.IsInRole("Castomer"))
+    @if (ViewContext.HttpContext.User.IsInRole("Customer") || ViewContext.HttpContext.User.IsInRole("Admin"))
     {<a href="/App/AppCreate" class="btn btn-primary btn-lg">Создать  новую заявку</a><br/><br/>}    
     <table class="text-center table-bordered">
         <tr>
@@ -16,12 +16,14 @@
             <td style="width: 10%;"><p><b>Тип кадастровой работы</b></p></td>
             <td style="width: 6%;"><p><b>Описание</b></p></td>
             <td style="width: 8%;"><p><b>Статус</b></p></td>
-            <td style="width: 10%;"><p><b>Оплачено</b></p></td> 
+            <td style="width: 10%;"><p><b>Оплачено, ₽</b></p></td> 
             <td style="width: 13%;"><p><b>Опции</b></p></td>
+            @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+            { <td style="width: 13%;"><p><b>Опции</b></p></td>}
         </tr> 
         @foreach (var m in Model.Reverse())
         {<tr>
-            @if (!ViewContext.HttpContext.User.IsInRole("Castomer"))
+            @if (!ViewContext.HttpContext.User.IsInRole("Customer"))
             {   <td><p>@Html.DisplayFor(model => m.Id)</p></td>
                 <td><p>@m.User.surname @m.User.name @m.User.patronimic</p></td>
                 <td><p>@Html.DisplayFor(model => m.date)</p></td>
@@ -30,7 +32,7 @@
                 <td><p>@Html.DisplayFor(model => m.description)</p></td>
                 <td><p>@Html.DisplayFor(model => m.Status.sName)</p></td>
                 <td><p>@Html.DisplayFor(model => m.cost)</p></td>}
-            @if (ViewBag.User.Id == m.User.Id && ViewContext.HttpContext.User.IsInRole("Castomer"))
+            @if (ViewBag.User.Id == m.User.Id && ViewContext.HttpContext.User.IsInRole("Customer"))
             {   <td><p>@Html.DisplayFor(model => m.Id)</p></td>
                 <td><p>@m.User.surname @m.User.name @m.User.patronimic</p></td>
                 <td><p>@Html.DisplayFor(model => m.date)</p></td>
@@ -39,7 +41,8 @@
                 <td><p>@Html.DisplayFor(model => m.description)</p></td>
                 <td><p>@Html.DisplayFor(model => m.Status.sName)</p></td>
                 <td><p>@Html.DisplayFor(model => m.cost)</p></td>}
-            @if (ViewBag.User.Id == m.User.Id && ViewContext.HttpContext.User.IsInRole("Castomer"))
+            @if ((ViewBag.User.Id == m.User.Id && ViewContext.HttpContext.User.IsInRole("Customer")) || 
+                ViewContext.HttpContext.User.IsInRole("Admin"))
             {<td><p><a href="/App/AppEdit/@m.Id" class="btn btn-primary btn-sm">Изменить</a>
                     <a href="/App/AppCancel/@m.Id" class="btn btn-warning btn-sm">Отменить</a></p>
                     <a href="/App/AppDelete/@m.Id" class="btn btn-danger btn-sm">Удалить</a>
@@ -47,7 +50,7 @@
                     {<a href="/App/AppPay/@m.Id" class="btn btn-success btn-sm">Оплатить</a>}
             </td>
             }
-            @if (!ViewContext.HttpContext.User.IsInRole("Castomer"))
+            @if (!ViewContext.HttpContext.User.IsInRole("Customer"))
             {<td>@if (m.fk_status == 3) 
                 {<a href="/CW/CWCreate/@m.Id" class="btn btn-success btn-sm">Принять</a>
                 <a href="/App/AppCancel/@m.Id" class="btn btn-danger btn-sm">Отклонить</a>}
